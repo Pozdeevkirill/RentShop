@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\VideoRentShop.DAL\VideoRentShop.Data\VideoRentShop.Data.csproj" />
+    <ProjectReference Include="..\VideoRentShop.Common\VideoRentShop.Common.csproj" />
+    <ProjectReference Include="..\VideoRentShop.HttpModels\VideoRentShop.HttpModels.csproj" />
+  </ItemGroup>
+
+</Project>

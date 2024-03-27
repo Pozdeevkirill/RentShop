@@ -1,0 +1,23 @@
+D:\VideoRentShop\VideoRentShop.DAL\VideoRentShop.Models\bin\Debug\net8.0\VideoRentShop.Models.deps.json
+D:\VideoRentShop\VideoRentShop.DAL\VideoRentShop.Models\bin\Debug\net8.0\VideoRentShop.Models.dll
+D:\VideoRentShop\VideoRentShop.DAL\VideoRentShop.Models\bin\Debug\net8.0\VideoRentShop.Models.pdb
+D:\VideoRentShop\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\VideoRentShop.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\VideoRentShop\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\VideoRentShop.Models.AssemblyInfoInputs.cache
+D:\VideoRentShop\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\VideoRentShop.Models.AssemblyInfo.cs
+D:\VideoRentShop\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\VideoRentShop.Models.csproj.CoreCompileInputs.cache
+D:\VideoRentShop\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\VideoRentShop.Models.dll
+D:\VideoRentShop\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\refint\VideoRentShop.Models.dll
+D:\VideoRentShop\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\VideoRentShop.Models.pdb
+D:\VideoRentShop\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\ref\VideoRentShop.Models.dll
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Models\bin\Debug\net8.0\VideoRentShop.Models.deps.json
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Models\bin\Debug\net8.0\VideoRentShop.Models.dll
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Models\bin\Debug\net8.0\VideoRentShop.Models.pdb
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\VideoRentShop.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\VideoRentShop.Models.AssemblyInfoInputs.cache
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\VideoRentShop.Models.AssemblyInfo.cs
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\VideoRentShop.Models.csproj.CoreCompileInputs.cache
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\VideoRentShop.Models.sourcelink.json
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\VideoRentShop.Models.dll
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\refint\VideoRentShop.Models.dll
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\VideoRentShop.Models.pdb
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Models\obj\Debug\net8.0\ref\VideoRentShop.Models.dll
