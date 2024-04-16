@@ -1,29 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using VideoRentShop.Common.PasswordHelper;
 using VideoRentShop.Data.Interfaces;
 using VideoRentShop.Models.Identity;
+using VideoRentShop.Models.Shop;
 
 namespace VideoRentShop.Data
 {
     public class MainDbContext : DbContext, IApplicationContext
     {
         public DbSet<User> Users => Set<User>();
+        public DbSet<Item> Items => Set<Item>();
+        public DbSet<Price> Prices => Set<Price>();
+        public DbSet<FileAttachment> FileAttachments => Set<FileAttachment>();
+        public DbSet<ItemFile> ItemFiles => Set<ItemFile>();
 
-        public MainDbContext(DbContextOptions options) : base(options) { }
+		public MainDbContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            User user = new()
-            {
-                Id = Guid.NewGuid(),
-                Login = "admin",
-                Name = "admin",
-                Password = PasswordHelper.HashPassword("admin")
-            };
-
-            modelBuilder.Entity<User>().HasData(user);
-            base.OnModelCreating(modelBuilder);
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

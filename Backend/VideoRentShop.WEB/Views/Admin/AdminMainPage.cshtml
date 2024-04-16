@@ -1,0 +1,22 @@
+﻿@page
+@model VideoRentShop.WEB.Views.Admin.AdminMainPageModel
+@{
+    Layout = "_AdminLayout";
+}
+<div id="partialZone">
+
+</div>
+
+@section Scripts {
+    <script>
+        var activeBtn = null;
+        function loadPartial(partilaName, elem) {
+            if (activeBtn != null) {
+                activeBtn.classList.remove("active");
+            }
+            activeBtn = elem;
+            activeBtn.classList.add("active");
+            $("#partialZone").load(partilaName);
+        }
+    </script>
+}

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VideoRentShop.HttpModels")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66b7aa0c2ac9498635306e808a4f71f8f1db5d73")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+483e216e8bccf088005ed6ef702a70d16ab7a409")]
 [assembly: System.Reflection.AssemblyProductAttribute("VideoRentShop.HttpModels")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VideoRentShop.HttpModels")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

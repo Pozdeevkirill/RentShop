@@ -1,4 +1,6 @@
-﻿namespace VideoRentShop.Models.Identity
+﻿using VideoRentShop.Models.Enums;
+
+namespace VideoRentShop.Models.Identity
 {
     /// <summary>
     /// Модель пользователя
@@ -21,13 +23,8 @@
         public string Password { get; set; }
 
         /// <summary>
-        /// Токен
+        /// Роль пользователя
         /// </summary>
-        public string? RefreshToken { get; set; }
-
-        /// <summary>
-        /// Срок годности токена
-        /// </summary>
-        public DateTime RefreshTokenExpiryTime { get; set; }
+        public Role Role { get; set; }
     }
 }

@@ -1,0 +1,219 @@
+﻿<style>
+	input[type="file"] {
+		display: none;
+	}
+
+	label.file {
+		display: block;
+		position: relative;
+		background-color: #025bee;
+		color: #ffffff;
+		font-size: 12px;
+		text-align: center;
+		width: 150px;
+		padding: 10px 0;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+	.container p.file {
+		margin: 20px 0 30px 0;
+	}
+
+	#images {
+		margin: auto;
+		display: flex;
+		justify-content: center;
+		gap: 10px;
+		flex-wrap: wrap;
+	}
+
+	li.file {
+		width: 20%;
+		height: 100px;
+		display: flex;
+		flex-direction: column;
+		border: none;
+	}
+
+	.prod_input {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		cursor: pointer;
+	}
+
+		.prod_input + img {
+			border: 1px dashed #4e73df;
+			width: 100%;
+			height: 100%;
+			padding: 5px;
+			width: 90%;
+			margin: auto;
+			object-fit: contain;
+		}
+
+	prod_input:hover + img {
+		border: 1px solid #4e73df;
+	}
+
+	.prod_input:checked + img {
+		border: 2px solid #4e73df;
+	}
+</style>
+
+<div class="pd-ltr-20 xs-pd-20-10">
+	<div class="min-height-200px">
+		<div class="page-header">
+			<div class="row">
+				<div class="col-md-6 col-sm-12">
+					<div class="title">
+						<h4>Создание карточки товара</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Default Basic Forms Start -->
+		<div class="pd-20 card-box mb-30">
+			<form name="addUserForm" id="addItemForm">
+				@* Название *@
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Название товара</label>
+					<div class="col-sm-12 col-md-10">
+						<input type="text" class="form-control" id="nameInput" name="Name">
+						<div class="form-control-feedback danger-text">Это обязательное поле</div>
+					</div>
+				</div>
+
+				@* Описание *@
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Описание товара</label>
+					<div class="col-sm-12 col-md-10">
+						<textarea class="textarea_editor form-control border-radius-0"
+								  placeholder="Enter text ..." name="Description" id="descriptionInput"></textarea>
+						<div class="form-control-feedback danger-text">Это обязательное поле</div>
+					</div>
+				</div>
+
+				@* Активный товар *@
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">&emsp;</label>
+					<div class="custom-control custom-checkbox"
+						 data-toggle="tooltip" title="Данный товар сразу попадет на главную страницу и его увидят пользователи" data-placement="top">
+						 <input type="checkbox"
+								class="custom-control-input col-sm-12 col-md-10"
+								id="isActiveInput" 
+								name="IsActive"/>
+						<label class="custom-control-label" for="isActiveInput">Активный по умолчанию</label>
+					</div>
+				</div>
+
+				@* Картинки *@
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Изображения</label>
+					<div class="form-group">
+						<input type="file" name="Images" id="file-input" accept="image/png, image/jpeg" onchange="preview()" multiple>
+						<label for="file-input" class="file">
+							<i class="fas fa-upload"></i> &nbsp; Добавить
+						</label>
+						<ul id="images"></ul>
+					</div>
+				</div>
+			</form>
+			<button type="button" class="btn btn-outline-primary" id="addItem">
+				Добавить
+			</button>
+		</div>
+	</div>
+</div>
+
+<script>
+	var editor = $('.textarea_editor').wysihtml5();
+
+	let fileInput = document.getElementById("file-input");
+	let imageContainer = document.getElementById("images");
+	let numOfFiles = document.getElementById("num-of-files");
+
+	
+
+
+	$('#addItem').on('click', function () {
+
+		console.log();
+		var result = {
+			Name: $("#nameInput").val(),
+			Description: $('iframe').contents().find('.wysihtml5-editor').html(),
+			IsActive: $("#isActiveInput").is(":checked"),
+		};
+		$.ajax({
+			type: "POST",
+			url: '/api/item/addItem',
+			data: JSON.stringify(result),
+			processData: false,
+			contentType: 'application/json',
+			success: function (response) {
+				console.log(response);
+
+				var data = new FormData();
+				data.append("itemId", response);
+
+				for (var i = 0; i < $("#file-input")[0].files.length; i++) {
+					data.append("files", $("#file-input")[0].files[i]);
+				}
+
+				$.ajax({
+					type: "POST",
+					url: `/api/file/upload?itemId=${response}`,
+					data: data,
+					processData: false,
+					contentType: false,
+					success: function (response) {
+
+					},
+					error: function (response) {
+					}
+				});
+			},
+			error: function (response) {
+			}
+		});
+	});
+
+
+	function preview() {
+		imageContainer.innerHTML = "";
+		imageContainer.className = "card-holder";
+		let p = 0;
+
+		console.log(fileInput.files);
+		for (i of fileInput.files) {
+			let reader = new FileReader();
+			let li = document.createElement("li");
+			li.className = "file card product-image";
+
+			//Создание элемента radio
+			let radio = document.createElement("input");
+			radio.type = "radio";
+			radio.value = p;
+			radio.name = "MainImageId";
+			radio.className = "prod_input";
+			if (p === 0) {
+				radio.checked = true;
+			}
+
+			//Вставка картинки в ul
+			reader.onload = () => {
+				let img = document.createElement("img");
+				img.className = "file";
+				img.setAttribute("src", reader.result);
+				li.appendChild(img);
+			}
+			li.appendChild(radio);
+			imageContainer.appendChild(li);
+			reader.readAsDataURL(i);
+			p++;
+		}
+	}
+</script>

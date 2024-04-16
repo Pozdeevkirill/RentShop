@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoRentShop.Migrations", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoRentShop.Services", "VideoRentShop.BAL\VideoRentShop.Services\VideoRentShop.Services.csproj", "{B019CAE4-6C4D-4C4F-B02B-196805168607}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoRentShop.HttpModels", "VideoRentShop.BAL\VideoRentShop.HttpModels\VideoRentShop.HttpModels.csproj", "{301FF794-B402-41F6-B7AF-86BF8B5CAE04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoRentShop.HttpModels", "VideoRentShop.BAL\VideoRentShop.HttpModels\VideoRentShop.HttpModels.csproj", "{301FF794-B402-41F6-B7AF-86BF8B5CAE04}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoRentShop.WEB", "VideoRentShop.WEB\VideoRentShop.WEB.csproj", "{7B3B2551-18FF-4255-B533-67E8DF80A04B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{301FF794-B402-41F6-B7AF-86BF8B5CAE04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{301FF794-B402-41F6-B7AF-86BF8B5CAE04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{301FF794-B402-41F6-B7AF-86BF8B5CAE04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B3B2551-18FF-4255-B533-67E8DF80A04B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B3B2551-18FF-4255-B533-67E8DF80A04B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B3B2551-18FF-4255-B533-67E8DF80A04B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B3B2551-18FF-4255-B533-67E8DF80A04B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

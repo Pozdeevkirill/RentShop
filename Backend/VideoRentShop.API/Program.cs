@@ -1,8 +1,6 @@
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Cors;
 using Microsoft.EntityFrameworkCore;
 using VideoRentShop.API;
+using VideoRentShop.API.Settings;
 using VideoRentShop.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,23 +8,20 @@ var builder = WebApplication.CreateBuilder(args);
 //Добавление зависимостей
 builder.Services.AddDependencyInjection(builder.Configuration);
 
+
+
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(x => x.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull);
+
+builder.Services.Configure<TokenSetting>(builder.Configuration.GetSection("TokenSetting"));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-builder.Services.AddCors(option =>
-    option.AddPolicy(name: MyAllowSpecificOrigins,
-       policy =>
-       {
-           policy.WithOrigins("http://localhost:4200/");
-       })
-);
-
+var MyAllowSpecificOrigins = "AllowSetOrigins";
+builder.Services.AddCors();
 
 #region Подключение к БД
 
@@ -61,6 +56,11 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseCors(option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+app.UseCors(x => x
+    .SetIsOriginAllowed(origin => true)
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials());
+//app.UseCors(MyAllowSpecificOrigins);
 
 app.Run();

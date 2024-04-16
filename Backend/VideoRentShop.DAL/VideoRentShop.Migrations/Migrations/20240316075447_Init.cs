@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-using VideoRentShop.Common.PasswordHelper;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using VideoRentShop.Common;
+
 
 #nullable disable
 
@@ -28,8 +28,16 @@ namespace VideoRentShop.Migrations.Migrations
 
             //Создаю базового пользователя с Логином: admin, пароль: admin
             migrationBuilder.Sql(
-               $@"insert into Users(Id, Login,Name, Password)
-                    values(NEWID(), 'admin','admin', '{PasswordHelper.HashPassword("admin")}')"
+               $@"
+                    BEGIN
+                       IF NOT EXISTS (SELECT * FROM Users 
+                                       WHERE Login = 'admin')
+                       BEGIN
+                           insert into Users(Id, Login,Name, Password)
+                            values(NEWID(), 'admin','admin', '{PasswordHelper.HashPassword("admin")}')
+                       END
+                    END
+                    "
                 ); ;
         }
 

@@ -20,15 +20,14 @@ namespace VideoRentShop.Data.Implementations
             get => _context;
         }
 
-        public TEntity Add(TEntity entity)
+        public Guid Add(TEntity entity)
         {
-            return _context.Set<TEntity>().Add(entity).Entity;
+            return _context.Set<TEntity>().Add(entity).Entity.Id;
         }
 
-        public ICollection<TEntity> AddRange(ICollection<TEntity> entities)
+        public void AddRange(ICollection<TEntity> entities)
         {
             _context.Set<TEntity>().AddRange(entities);
-            return entities;
         }
 
         public bool Any()

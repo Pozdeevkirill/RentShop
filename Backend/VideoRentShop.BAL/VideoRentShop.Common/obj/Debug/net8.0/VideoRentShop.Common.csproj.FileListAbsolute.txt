@@ -12,6 +12,7 @@ D:\VideoRentShop\VideoRentShop.BAL\VideoRentShop.Common\obj\Debug\net8.0\ref\Vid
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.BAL\VideoRentShop.Common\bin\Debug\net8.0\VideoRentShop.Common.deps.json
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.BAL\VideoRentShop.Common\bin\Debug\net8.0\VideoRentShop.Common.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.BAL\VideoRentShop.Common\bin\Debug\net8.0\VideoRentShop.Common.pdb
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.BAL\VideoRentShop.Common\obj\Debug\net8.0\VideoRentShop.Common.csproj.AssemblyReference.cache
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.BAL\VideoRentShop.Common\obj\Debug\net8.0\VideoRentShop.Common.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.BAL\VideoRentShop.Common\obj\Debug\net8.0\VideoRentShop.Common.AssemblyInfoInputs.cache
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.BAL\VideoRentShop.Common\obj\Debug\net8.0\VideoRentShop.Common.AssemblyInfo.cs

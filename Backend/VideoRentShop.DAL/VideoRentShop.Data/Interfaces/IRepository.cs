@@ -14,12 +14,12 @@ namespace VideoRentShop.Data.Interfaces
         /// <summary>
         /// Добавить сущность
         /// </summary>
-        TEntity Add(TEntity entity);
+        Guid Add(TEntity entity);
 
         /// <summary>
         /// Добавить несколько сущностей
         /// </summary>
-        ICollection<TEntity> AddRange(ICollection<TEntity> entities);
+        void AddRange(ICollection<TEntity> entities);
 
         /// <summary>
         /// Удалить сущность

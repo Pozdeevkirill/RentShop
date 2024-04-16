@@ -1,0 +1,9 @@
+<div class="form-row">
+    <label>Логин:</label>
+    <input type="text" placeholder="логин" [(ngModel)]="loginValue">
+</div>
+<div class="form-row">
+    <label>Пароль:</label>
+    <input type="password" placeholder="пароль" [(ngModel)]="passwordValue">
+</div>
+<button class="button" (click)="login()">Войти</button>

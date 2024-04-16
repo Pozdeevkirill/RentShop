@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VideoRentShop.API.Attributes.Authorization;
+using VideoRentShop.Common;
 using VideoRentShop.HttpModels.Requests.Identity;
 using VideoRentShop.Services.Interfaces.Identity;
 
@@ -20,7 +22,8 @@ namespace VideoRentShop.API.Controllers.API.Identity
         [Route("login")]
         public IActionResult Login([FromBody]LoginRequest request)
         {
-            return Ok(_authService.Login(request));
+            var response = _authService.Login(request, HttpHelper.GetIp(Request, HttpContext.Connection));
+            return Ok(response);
         }
 
         [HttpPost]
@@ -34,9 +37,36 @@ namespace VideoRentShop.API.Controllers.API.Identity
 
         [HttpPost]
         [Route("refresh")]
-        public IActionResult RefreshToken(RefreshTokenRequest request)
+        [Authorize]
+        public IActionResult RefreshToken([FromBody]RefreshTokenRequest request)
         {
-            return Ok(_tokenService.RefreshToken(request));
+            var response = _tokenService.RefreshToken(request.RefreshToken, HttpHelper.GetIp(Request, HttpContext.Connection));
+
+            return Ok(response);
         }
+
+        [HttpGet]
+        [Route("test")]
+        [Authorize]
+        public IActionResult TestMethod()
+        {
+            return Ok("Auth");
+        }
+
+
+        #region Helpers
+
+        private void SetRefreshTokenInCookie(string token)
+        {
+            var cookieOption = new CookieOptions
+            {
+                HttpOnly = false,
+                Expires = DateTime.UtcNow.AddDays(1),
+            };
+
+            Response.Cookies.Append("refreshToken", token, cookieOption);
+        }
+
+        #endregion
     }
 }

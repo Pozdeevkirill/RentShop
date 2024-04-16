@@ -1,0 +1,118 @@
+﻿<div class="pd-ltr-20 xs-pd-20-10">
+	<div class="min-height-200px">
+		<div class="page-header">
+			<div class="row">
+				<div class="col-md-6 col-sm-12">
+					<div class="title">
+						<h4>Регистрация нового пользователя</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Default Basic Forms Start -->
+		<div class="pd-20 card-box mb-30">
+			<form name="addUserForm" id="addUserForm">
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Имя пользователя</label>
+					<div class="col-sm-12 col-md-10">
+						<input type="text" class="form-control" id="nameInput" name="Name">
+						<div class="form-control-feedback danger-text">Это обязательное поле</div>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Логин</label>
+					<div class="col-sm-12 col-md-10">
+						<input type="text" class="form-control" id="loginInput" name="Login">
+						<div class="form-control-feedback danger-text">Это обязательное поле</div>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Пароль</label>
+					<div class="col-sm-12 col-md-10">
+						<input type="password" class="form-control" id="passwordInput" name="Password">
+						<div class="form-control-feedback danger-text">Это обязательное поле</div>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Роль</label>
+					<div class="col-sm-12 col-md-10">
+						<select class="custom-select col-12" id="roleSelect" name="Role">
+							<option selected="" value="">Не выбрано</option>
+						</select>
+					</div>
+				</div>
+			</form>
+			<button type="button" class="btn btn-outline-primary" id="addUser">
+				Добавить
+			</button>
+		</div>
+	</div>
+</div>
+<script>
+	var nameInput = new Input("#nameInput", true);
+	var loginInput = new Input("#loginInput", true);
+	var passwordInput = new Input("#passwordInput", true);
+
+	var roleSelect = $("#roleSelect");
+	var rolesList = null;
+
+	$.ajax({
+		type: "GET",
+		url: '/api/enum/roles',
+		success: function (response) {
+			rolesList = response;
+			$.each(rolesList, (i, item) => {
+				console.log(item);
+				var el = `<option value="${item.id}">${item.name}</option>`;
+				roleSelect.append(el);
+			});
+		},
+		error: function (response) {
+			console.log(response.responseJSON.message)
+			$('#serverValidate').html(response.responseJSON.message);
+		}
+	});
+
+	var modal = new Modal("тест", "тест описание", 1);
+
+
+	$("#addUser").on('click', () => {
+		if (nameInput.isValid() && loginInput.isValid() && passwordInput.isValid() 
+		&& $("#roleSelect").val() != null && $("#roleSelect").val() != undefined && $("#roleSelect").val() != '') {
+
+			$.ajax({
+				type: "POST",
+				url: '/api/user/add',
+				data: $('#addUserForm').serialize(),
+				success: function (response) {
+					console.log(response);
+					Swal.fire({
+						title: "Успех!",
+						text: `Пользовтель успешно зарегестрирован!`,
+						icon: "success"
+					});
+				},
+				error: function (response) {
+					Swal.fire({
+						title: "Упс..",
+						text: `При регистрации пользователя произошла ошибка.`,
+						icon: "error"
+					});
+				}
+			})
+
+
+			
+		}else {
+			Swal.fire({
+				title: "Упс..",
+				text: `Не все обязательные поля заполнены.`,
+				icon: "error"
+			});
+		}
+	});
+
+</script>

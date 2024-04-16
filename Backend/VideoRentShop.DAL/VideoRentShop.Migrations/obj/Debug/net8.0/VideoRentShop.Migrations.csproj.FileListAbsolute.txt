@@ -21,10 +21,12 @@ C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoR
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\bin\Debug\net8.0\VideoRentShop.Migrations.runtimeconfig.json
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\bin\Debug\net8.0\VideoRentShop.Migrations.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\bin\Debug\net8.0\VideoRentShop.Migrations.pdb
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\bin\Debug\net8.0\VideoRentShop.Common.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\bin\Debug\net8.0\VideoRentShop.Data.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\bin\Debug\net8.0\VideoRentShop.Models.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\bin\Debug\net8.0\VideoRentShop.Data.pdb
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\bin\Debug\net8.0\VideoRentShop.Models.pdb
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\bin\Debug\net8.0\VideoRentShop.Common.pdb
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\obj\Debug\net8.0\VideoRentShop.Migrations.csproj.AssemblyReference.cache
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\obj\Debug\net8.0\VideoRentShop.Migrations.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\obj\Debug\net8.0\VideoRentShop.Migrations.AssemblyInfoInputs.cache
@@ -37,5 +39,3 @@ C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoR
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\obj\Debug\net8.0\VideoRentShop.Migrations.pdb
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\obj\Debug\net8.0\VideoRentShop.Migrations.genruntimeconfig.cache
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\obj\Debug\net8.0\ref\VideoRentShop.Migrations.dll
-C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\bin\Debug\net8.0\VideoRentShop.Common.dll
-C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Migrations\bin\Debug\net8.0\VideoRentShop.Common.pdb

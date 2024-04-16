@@ -22,6 +22,7 @@ namespace VideoRentShop.API
             #endregion
 
             #region Services
+            services.AddSingleton<IIdentityService, IdentityService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAuthService, AuthService>();
             #endregion

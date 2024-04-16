@@ -19,7 +19,9 @@ C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoR
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Data\bin\Debug\net8.0\VideoRentShop.Data.runtimeconfig.json
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Data\bin\Debug\net8.0\VideoRentShop.Data.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Data\bin\Debug\net8.0\VideoRentShop.Data.pdb
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Data\bin\Debug\net8.0\VideoRentShop.Common.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Data\bin\Debug\net8.0\VideoRentShop.Models.dll
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Data\bin\Debug\net8.0\VideoRentShop.Common.pdb
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Data\bin\Debug\net8.0\VideoRentShop.Models.pdb
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Data\obj\Debug\net8.0\VideoRentShop.Data.csproj.AssemblyReference.cache
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Data\obj\Debug\net8.0\VideoRentShop.Data.GeneratedMSBuildEditorConfig.editorconfig
@@ -33,5 +35,3 @@ C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoR
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Data\obj\Debug\net8.0\VideoRentShop.Data.pdb
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Data\obj\Debug\net8.0\VideoRentShop.Data.genruntimeconfig.cache
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Data\obj\Debug\net8.0\ref\VideoRentShop.Data.dll
-C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Data\bin\Debug\net8.0\VideoRentShop.Common.dll
-C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.DAL\VideoRentShop.Data\bin\Debug\net8.0\VideoRentShop.Common.pdb

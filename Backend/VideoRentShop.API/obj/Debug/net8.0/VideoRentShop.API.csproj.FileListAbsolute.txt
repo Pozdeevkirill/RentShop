@@ -154,6 +154,7 @@ C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoR
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\Humanizer.dll
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
@@ -261,9 +262,11 @@ C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoR
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\VideoRentShop.Common.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\VideoRentShop.Data.dll
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\VideoRentShop.HttpModels.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\VideoRentShop.Migrations.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\VideoRentShop.Models.dll
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\VideoRentShop.Services.dll
+C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\VideoRentShop.HttpModels.pdb
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\VideoRentShop.Services.pdb
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\VideoRentShop.Data.pdb
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\VideoRentShop.Migrations.pdb
@@ -291,5 +294,3 @@ C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoR
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\obj\Debug\net8.0\VideoRentShop.API.pdb
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\obj\Debug\net8.0\VideoRentShop.API.genruntimeconfig.cache
 C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\obj\Debug\net8.0\ref\VideoRentShop.API.dll
-C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\VideoRentShop.HttpModels.dll
-C:\Users\kiril\OneDrive\Рабочий стол\RentShop\RentShop\Backend\VideoRentShop.API\bin\Debug\net8.0\VideoRentShop.HttpModels.pdb
