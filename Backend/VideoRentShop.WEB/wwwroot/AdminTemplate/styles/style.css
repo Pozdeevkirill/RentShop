@@ -43,6 +43,7 @@ a {
 	outline: none;
 	text-decoration: none;
 	color: #555;
+	cursor: pointer;
 }
 a:hover, a:focus {
 	outline: none;

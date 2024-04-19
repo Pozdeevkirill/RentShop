@@ -42,7 +42,7 @@
                 url: '/api/login',
                 data: $('#loginForm').serialize(),
                 success: function (response) {
-                    window.location = "@Url.Action("index", "home")"
+                    window.location = "@Url.Action("Index", "AdminView")"
                     serverValidate.text = "";
                 },
                 error: function (response) {

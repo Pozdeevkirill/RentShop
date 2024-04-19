@@ -2,8 +2,12 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using VideoRentShop.Data;
 using VideoRentShop.WEB;
+using VideoRentShop.WEB.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews()
@@ -35,6 +39,9 @@ builder.Services.AddAuthorization();
 #endregion
 
 var app = builder.Build();
+
+//Регистрация кастомного обработчика ошибок
+app.UseExceptionHandler();
 
 //Автоматическая миграция
 using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())

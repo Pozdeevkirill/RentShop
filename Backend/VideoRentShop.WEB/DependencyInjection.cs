@@ -1,4 +1,5 @@
-﻿using VideoRentShop.Data;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using VideoRentShop.Data;
 using VideoRentShop.Data.Implementations;
 using VideoRentShop.Data.Implementations.Identity;
 using VideoRentShop.Data.Interfaces;
@@ -14,7 +15,10 @@ namespace VideoRentShop.WEB
     {
         public static IServiceCollection AddDependencyInjection(this IServiceCollection services, IConfiguration configuration)
         {
+
+            #region Common
             services.AddScoped<IApplicationContext>(provider => provider.GetRequiredService<MainDbContext>());
+            #endregion
 
             #region Repositories
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

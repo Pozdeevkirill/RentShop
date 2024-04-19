@@ -24,6 +24,7 @@ namespace VideoRentShop.WEB.Controllers.ViewControllers.Admin
         [Route("addUser")]
         public ActionResult ViewAddUser()
         {
+            throw new Exception("Тест ошибки");
             return PartialView($"{_defaultViewFolder}/Users/AddUser");
         }
 
