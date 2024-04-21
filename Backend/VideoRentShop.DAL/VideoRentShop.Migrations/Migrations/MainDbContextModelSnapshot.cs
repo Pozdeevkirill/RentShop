@@ -136,6 +136,9 @@ namespace VideoRentShop.Migrations.Migrations
                 {
                     b.HasBaseType("VideoRentShop.Models.Shop.FileAttachment");
 
+                    b.Property<bool>("IsMainFile")
+                        .HasColumnType("bit");
+
                     b.Property<Guid>("ItemId")
                         .HasColumnType("uniqueidentifier");
 

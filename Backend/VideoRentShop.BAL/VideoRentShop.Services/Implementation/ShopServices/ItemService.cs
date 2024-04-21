@@ -1,5 +1,9 @@
 ﻿using VideoRentShop.Data.Interfaces;
+using VideoRentShop.HttpModels.Requests;
 using VideoRentShop.HttpModels.Requests.Admin;
+using VideoRentShop.HttpModels.Responses;
+using VideoRentShop.HttpModels.ViewObjects;
+using VideoRentShop.HttpModels.ViewObjects.Shop;
 using VideoRentShop.Models.Shop;
 using VideoRentShop.Services.Interfaces.ShopServices;
 
@@ -14,7 +18,7 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 			_itemRepository = itemRepository;
 		}
 
-		public Guid Create(AddItemRequest request)
+		public IdWithNameVo Create(AddItemRequest request)
 		{
 			Item item = new()
 			{
@@ -24,12 +28,42 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 				Name = request.Name
 			};
 
-			Guid result = Guid.Empty;
+			IdWithNameVo result = new(Guid.Empty, request.Name);
 
 			_itemRepository.UnitOfWork.Execute(() =>
 			{
-				result = _itemRepository.Add(item);
+				result.Id = _itemRepository.Add(item);
 			});
+
+			return result;
+		}
+
+		public PaginationResponse<ItemVo> GetItems(PaginationRequest request)
+		{
+			if (request == null) throw new Exception("Запрос не может быть пустым!");
+
+			var result = new PaginationResponse<ItemVo>();
+
+			if (request.Take == 0) return result;
+
+			result.Data = _itemRepository.GetAllIncluding(x => x.Files).Skip(request.Skip).Take(request.Take).Select(x => new ItemVo()
+			{
+				Id = x.Id,
+				Count = x.Count,
+				Name = x.Name,
+				Description = x.Description,
+				IsActive = x.IsActive,
+				Files = x.Files == null ? new() : x.Files.Select(y => new FileVo()
+				{
+					FileName = y.FileName,
+					SystemName = y.SystemName,
+					MimeType = y.MimeType,
+					File = y.File,
+					IsMainFile = y.IsMainFile,
+				}).ToList()
+			}).ToList();
+
+			result.CountAll = _itemRepository.Count();
 
 			return result;
 		}

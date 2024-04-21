@@ -1,26 +1,39 @@
-function Pagination(pagingClass = '.pagination', url) {
+function Pagination(url, pagingClass = '.paginationContainer', _itemsPearPage = 5, generateElement) {
     const content = document.querySelector(pagingClass);
-    const itemsPerPage = 2; // set number of items per page
+    let itemsPerPage = _itemsPearPage; // set number of items per page
     let currentPage = 0;
-    const countAll = 0;
+    let countAll = 0;
+    let data = [];
 
-    Init() {
-        createPageButtons();
+    var _init = function() {
+        _showPage(1);
     }
 
-    function showPage(page) {
-        const startIndex = page * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        items.forEach((item, index) => {
-            item.classList.toggle('hidden', index < startIndex || index >= endIndex);
+    function _showPage(page) {
+        if (currentPage == page) return;
+        currentPage = page;
+
+        const take = itemsPerPage;
+        const skip = (page - 1) * itemsPerPage;
+
+        http.get(url + `?take=${take}&skip=${skip}`, (response) => {
+            countAll = response.countAll;
+            data = response.data;
+
+            _createPageButtons();
+            _updateActiveButtonStates();
+
+            generateElement(data);
         });
-        updateActiveButtonStates();
     }
 
-    function createPageButtons() {
-        const totalPages = Math.ceil(countAll / itemsPerPage);
+    function _createPageButtons() {
+       const totalPages = Math.ceil(countAll / itemsPerPage);
         const paginationContainer = document.createElement('div');
-        const paginationDiv = document.body.appendChild(paginationContainer);
+        const paginationDiv = document.querySelector(pagingClass);
+
+        paginationDiv.innerHTML = '';
+        paginationDiv.appendChild(paginationContainer);
         paginationContainer.classList.add('pagination');
 
         // Add page buttons
@@ -29,16 +42,15 @@ function Pagination(pagingClass = '.pagination', url) {
             pageButton.textContent = i + 1;
             pageButton.addEventListener('click', () => {
                 currentPage = i;
-                showPage(currentPage);
-                updateActiveButtonStates();
+                _showPage(currentPage + 1);
+                _updateActiveButtonStates();
             });
 
-            content.appendChild(paginationContainer);
             paginationDiv.appendChild(pageButton);
         }
     }
 
-    function updateActiveButtonStates() {
+    function _updateActiveButtonStates() {
         const pageButtons = document.querySelectorAll('.pagination button');
         pageButtons.forEach((button, index) => {
             if (index === currentPage) {
@@ -49,6 +61,19 @@ function Pagination(pagingClass = '.pagination', url) {
         });
     }
 
-    Init();
-
+    return {
+        Init: _init,
+        ShowPage: _showPage,
+        CreatePageButtons: _createPageButtons,
+        UpdateActiveButtonStates: _updateActiveButtonStates
+    }
 }
+
+String.prototype.supplant = function (o) {
+    return this.replace(/{([^{}]*)}/g,
+        function (a, b) {
+            var r = o[b];
+            return typeof r === 'string' || typeof r === 'number' ? r : a;
+        }
+    );
+};

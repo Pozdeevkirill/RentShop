@@ -59,50 +59,25 @@
 	var roleSelect = $("#roleSelect");
 	var rolesList = null;
 
-	$.ajax({
-		type: "GET",
-		url: '/api/enum/roles',
-		success: function (response) {
-			rolesList = response;
-			$.each(rolesList, (i, item) => {
-				console.log(item);
-				var el = `<option value="${item.id}">${item.name}</option>`;
-				roleSelect.append(el);
-			});
-		},
-		error: function (response) {
-			console.log(response.responseJSON.message)
-			$('#serverValidate').html(response.responseJSON.message);
-		}
+	http.get('/api/enum/roles', (response) => {
+		rolesList = response;
+		$.each(rolesList, (i, item) => {
+			console.log(item);
+			var el = `<option value="${item.id}">${item.name}</option>`;
+			roleSelect.append(el);
+		});
 	});
 
 	$("#addUser").on('click', () => {
 		if (nameInput.isValid() && loginInput.isValid() && passwordInput.isValid() 
 		&& $("#roleSelect").val() != null && $("#roleSelect").val() != undefined && $("#roleSelect").val() != '') {
-
-			$.ajax({
-				type: "POST",
-				url: '/api/user/add',
-				data: $('#addUserForm').serialize(),
-				success: function (response) {
-					console.log(response);
-					Swal.fire({
-						title: "Успех!",
-						text: `Пользовтель успешно зарегестрирован!`,
-						icon: "success"
-					});
-				},
-				error: function (response) {
-					Swal.fire({
-						title: "Упс..",
-						text: `При регистрации пользователя произошла ошибка.`,
-						icon: "error"
-					});
-				}
-			})
-
-
-			
+			http.postForm('/api/user/add', $('#addUserForm'), (response) => {
+				Swal.fire({
+					title: "Успех!",
+					text: `Пользовтель успешно зарегестрирован!`,
+					icon: "success"
+				});
+			});
 		}else {
 			Swal.fire({
 				title: "Упс..",

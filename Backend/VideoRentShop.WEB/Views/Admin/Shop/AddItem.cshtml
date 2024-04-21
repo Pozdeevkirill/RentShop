@@ -131,7 +131,7 @@
 
 <script>
 	var editor = $('.textarea_editor').wysihtml5();
-
+	console.log("Test")
 	let fileInput = document.getElementById("file-input");
 	let imageContainer = document.getElementById("images");
 	let numOfFiles = document.getElementById("num-of-files");
@@ -149,46 +149,38 @@
 				Description: $('iframe').contents().find('.wysihtml5-editor').html(),
 				IsActive: $("#isActiveInput").is(":checked"),
 			};
-			$.ajax({
-				type: "POST",
-				url: '/api/item/addItem',
-				data: JSON.stringify(result),
-				processData: false,
-				contentType: 'application/json',
-				success: function (response) {
-					console.log(response);
 
-					var data = new FormData();
-					data.append("itemId", response);
+			http.post('/api/item/addItem', result, (response) => {
 
-					for (var i = 0; i < $("#file-input")[0].files.length; i++) {
-						data.append("files", $("#file-input")[0].files[i]);
-					}
+				var data = new FormData();
+				data.append("itemId", response.id);
 
-					$.ajax({
-						type: "POST",
-						url: `/api/file/upload?itemId=${response}`,
-						data: data,
-						processData: false,
-						contentType: false,
-						success: function (response) {
-							Swal.fire({
-								title: "Успех!",
-								text: `Товар успешно создан!`,
-								icon: "success"
-							});
-						},
-						error: function (response) {
-							Swal.fire({
-								title: "Упс..",
-								text: `При создании товара произошла ошибка.`,
-								icon: "error"
-							});
-						}
-					});
-				},
-				error: function (response) {
+				for (var i = 0; i < $("#file-input")[0].files.length; i++) {
+					data.append("files", $("#file-input")[0].files[i]);
 				}
+				var mainIndex = document.querySelector('input[name="MainImageId"]:checked');
+
+				$.ajax({
+					type: "POST",
+					url: `/api/file/upload?itemId=${response.id}&mainFileId=${mainIndex.value}`,
+					data: data,
+					processData: false,
+					contentType: false,
+					success: function (response) {
+						Swal.fire({
+							title: "Успех!",
+							text: `Товар успешно создан!`,
+							icon: "success"
+						});
+					},
+					error: function (response) {
+						Swal.fire({
+							title: "Упс..",
+							text: `При создании товара произошла ошибка.`,
+							icon: "error"
+						});
+					}
+				});
 			});
 		}
 		else {

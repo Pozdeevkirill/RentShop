@@ -68,6 +68,10 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/HttpClient.js"></script>
+    <script>
+        let http = new HttpClient();
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 
     <!-- js -->
@@ -81,6 +85,8 @@
     <script src="~/AdminTemplate/plugins/datatables/js/dataTables.responsive.min.js"></script>
     <script src="~/AdminTemplate/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
     <script src="~/AdminTemplate/vendors/scripts/dashboard3.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Google Tag Manager (noscript) -->
     <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS"
@@ -89,5 +95,7 @@
                 style="display: none; visibility: hidden"></iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
+
+    
 </body>
 </html>

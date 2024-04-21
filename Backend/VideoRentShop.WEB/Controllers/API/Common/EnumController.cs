@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VideoRentShop.Common;
+using VideoRentShop.HttpModels.ViewObjects;
 using VideoRentShop.Models.Enums;
-using VideoRentShop.WEB.Models;
 
 namespace VideoRentShop.WEB.Controllers.API.Common
 {

@@ -53,10 +53,17 @@ namespace VideoRentShop.API.Controllers.API.Identity
             return Ok("Auth");
         }
 
+		[HttpPost]
+		[Route("upload")]
+		public ActionResult Upload([FromForm] Guid itemId, [FromForm] List<IFormFile> files)
+		{
+			return Ok();
+		}
 
-        #region Helpers
 
-        private void SetRefreshTokenInCookie(string token)
+		#region Helpers
+
+		private void SetRefreshTokenInCookie(string token)
         {
             var cookieOption = new CookieOptions
             {

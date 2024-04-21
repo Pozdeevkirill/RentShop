@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VideoRentShop.HttpModels.Requests;
 using VideoRentShop.HttpModels.Requests.Admin;
 using VideoRentShop.Services.Interfaces.ShopServices;
 
@@ -21,6 +22,13 @@ namespace VideoRentShop.WEB.Controllers.API.Admin
 		public ActionResult AddItem([FromBody]AddItemRequest request)
 		{
 			return Ok(_itemService.Create(request));
+		}
+
+		[HttpGet]
+		[Route("get")]
+        public ActionResult GetItems([FromQuery]PaginationRequest request)
+		{
+			return Ok(_itemService.GetItems(request));
 		}
 	}
 }

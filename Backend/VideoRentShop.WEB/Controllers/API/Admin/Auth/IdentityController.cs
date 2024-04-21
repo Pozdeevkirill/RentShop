@@ -21,7 +21,7 @@ namespace VideoRentShop.WEB.Controllers.API.Admin.Auth
         [Route("login")]
         public ActionResult Login([FromForm] LoginRequest request)
         {
-            if (string.IsNullOrEmpty(request.Login) || string.IsNullOrEmpty(request.Password)) return BadRequest();
+            if (string.IsNullOrEmpty(request.Login) || string.IsNullOrEmpty(request.Password)) throw new Exception("Не указан логин и/или пароль!");
             var claims = _authService.Login(request);
 
             HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,

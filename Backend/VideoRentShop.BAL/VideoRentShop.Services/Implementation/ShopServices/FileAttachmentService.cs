@@ -29,6 +29,7 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 						MimeType = files[i].ContentType,
 						SystemName = files[i].FileName,
 						ItemId = itemId,
+						IsMainFile = i == mainFileIndex
 					});
 				}
 

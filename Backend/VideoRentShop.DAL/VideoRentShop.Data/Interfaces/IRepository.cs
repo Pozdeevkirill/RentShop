@@ -61,13 +61,16 @@ namespace VideoRentShop.Data.Interfaces
         /// <param name="predicate">Функция сортировки</param>
         TEntity? Get(Expression<Func<TEntity, bool>> predicate);
 
-        ICollection<TEntity> List();
-        ICollection<TEntity> List(Expression<Func<TEntity, bool>> predicate);
+		IList<TEntity> List();
+		IList<TEntity> List(Expression<Func<TEntity, bool>> predicate);
 
-        /// <summary>
-        /// Полчить кол-во сущностей
-        /// </summary>
-        int Count();
+		IList<TEntity> ListToPagin(int take, int skip);
+        IList<TEntity> ListToPagin(int take, int skip, Expression<Func<TEntity, bool>> predicate);
+
+		/// <summary>
+		/// Полчить кол-во сущностей
+		/// </summary>
+		int Count();
 
         /// <summary>
         /// Получить кол-во сущностей с условием

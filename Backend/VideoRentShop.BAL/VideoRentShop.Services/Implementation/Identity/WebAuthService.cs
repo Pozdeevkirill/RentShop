@@ -18,11 +18,11 @@ namespace VideoRentShop.Services.Implementation.Identity
 
         public ClaimsIdentity Login(LoginRequest request)
         {
-            if (!_userRepository.Any(x => x.Login == request.Login)) throw new Exception("Не существующий пользователь");
+            if (!_userRepository.Any(x => x.Login == request.Login)) throw new Exception("Неверный логин и/или пароль!");
 
             var user = _userRepository.List(x => x.Login == request.Login).Single();
 
-            if (!PasswordHelper.VerifyHashedPassword(user.Password, request.Password)) throw new Exception("Неверный пароли");
+            if (!PasswordHelper.VerifyHashedPassword(user.Password, request.Password)) throw new Exception("Неверный логин и/или пароль!");
 
             var claims = new List<Claim>
             {

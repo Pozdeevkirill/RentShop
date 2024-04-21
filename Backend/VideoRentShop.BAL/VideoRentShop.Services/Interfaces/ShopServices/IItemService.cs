@@ -1,10 +1,15 @@
-﻿using VideoRentShop.HttpModels.Requests.Admin;
-using VideoRentShop.Models.Shop;
+﻿using VideoRentShop.HttpModels.Requests;
+using VideoRentShop.HttpModels.Requests.Admin;
+using VideoRentShop.HttpModels.Responses;
+using VideoRentShop.HttpModels.ViewObjects;
+using VideoRentShop.HttpModels.ViewObjects.Shop;
 
 namespace VideoRentShop.Services.Interfaces.ShopServices
 {
 	public interface IItemService : IService
 	{
-		Guid Create(AddItemRequest request);
+		IdWithNameVo Create(AddItemRequest request);
+
+		PaginationResponse<ItemVo> GetItems(PaginationRequest request);
 	}
 }

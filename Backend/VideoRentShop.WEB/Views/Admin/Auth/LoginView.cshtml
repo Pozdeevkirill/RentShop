@@ -37,19 +37,10 @@
 @section Scripts {
     <script>
         $('#loginBtn').on('click', function () {
-            $.ajax({
-                type: "POST",
-                url: '/api/login',
-                data: $('#loginForm').serialize(),
-                success: function (response) {
-                    window.location = "@Url.Action("Index", "AdminView")"
-                    serverValidate.text = "";
-                },
-                error: function (response) {
-                    console.log(response.responseJSON.message)
-                    $('#serverValidate').html(response.responseJSON.message);
-                }
-            })
+            http.postForm('/api/login', $('#loginForm'), (response) => {
+                window.location = "@Url.Action("Index", "AdminView")"
+                serverValidate.text = "";
+            });
         })
     </script>
 }

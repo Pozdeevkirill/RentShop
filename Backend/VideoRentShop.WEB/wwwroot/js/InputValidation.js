@@ -1,4 +1,4 @@
-function Input(elementId, requred) {
+﻿function Input(elementId, requred) {
     const inputSuccsesClass = 'form-control-success';
     const inputDangerClass = 'form-control-danger';
 

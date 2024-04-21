@@ -24,7 +24,6 @@ namespace VideoRentShop.WEB.Controllers.ViewControllers.Admin
         [Route("addUser")]
         public ActionResult ViewAddUser()
         {
-            throw new Exception("Тест ошибки");
             return PartialView($"{_defaultViewFolder}/Users/AddUser");
         }
 
@@ -32,6 +31,12 @@ namespace VideoRentShop.WEB.Controllers.ViewControllers.Admin
         public ActionResult ViewAddItem()
         {
             return PartialView($"{_defaultViewFolder}/Shop/AddItem");
+        }
+
+        [Route("allItems")]
+        public ActionResult ViewAllItem()
+        {
+            return PartialView($"{_defaultViewFolder}/Shop/AllItems");
         }
     }
 }

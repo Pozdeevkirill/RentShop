@@ -22,12 +22,6 @@
 	<link rel="stylesheet" type="text/css" href="~/css/style.css" />
 
 
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async
-			src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"></script>
-	<script async
-			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2973766580778258"
-			crossorigin="anonymous"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag() {
@@ -258,7 +252,7 @@
 							<span class="micon bi bi-bag"></span><span class="mtext">Товар</span>
 						</a>
 						<ul class="submenu">
-							<li><a onclick="loadPartial('admin/allUsers', this)">Список товара</a></li>
+							<li><a onclick="loadPartial('admin/allItems', this)">Список товаров</a></li>
 							<li><a onclick="loadPartial('admin/addItem', this)">Добавить товар</a></li>
 						</ul>
 					</li>
@@ -276,25 +270,16 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/preloader.js"></script>
+	<script src="~/js/HttpClient.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
 	<script>
+		let http = new HttpClient();
+
 		$("#logOutBtn").on('click', () => {
-			$.ajax({
-				type: "POST",
-				url: '/api/logout',
-				success: function (response) {
-					window.location = "@Url.Action("index", "home")"
-				},
-				error: function (response) {
-					Swal.fire({
-						title: "Упс..",
-						text: `При регистрации пользователя произошла ошибка.`,
-						icon: "error"
-					});
-				}
-			})
+			http.post('/api/logout', null, (response) => {
+				window.location = "@Url.Action("index", "home")"
+			});
 		});
 	</script>
 
@@ -311,6 +296,7 @@
 	<script src="~/AdminTemplate/vendors/scripts/dashboard3.js"></script>
 	<script src="~/js/InputValidation.js"></script>
 	<script src="~/js/ModalDialog.js"></script>
+	<script src="~/js/Pagination.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- Google Tag Manager (noscript) -->
 	<noscript>

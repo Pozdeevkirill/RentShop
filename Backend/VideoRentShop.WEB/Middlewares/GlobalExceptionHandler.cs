@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
 using VideoRentShop.Common;
-using VideoRentShop.HttpModels.Common;
+using VideoRentShop.HttpModels.Responses;
 
 namespace VideoRentShop.WEB.Middlewares
 {

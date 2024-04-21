@@ -189,3 +189,18 @@ Generated_Code/
 
 # Backup & report files from converting an old project file
 # to a ne
+*.suo
+*.bin
+*.v2
+*.suo
+*.dll
+*.exe
+*.pdb
+*/obj
+Backend/VideoRentShop.API/obj
+Backend/VideoRentShop.BAL/VideoRentShop.Common/obj
+Backend/VideoRentShop.BAL/VideoRentShop.HttpModels/obj
+Backend/VideoRentShop.BAL/VideoRentShop.Services/obj
+Backend/VideoRentShop.DAL/VideoRentShop.Data/obj
+Backend/VideoRentShop.DAL/VideoRentShop.Migrations/obj
+Backend/VideoRentShop.DAL/VideoRentShop.Models/obj

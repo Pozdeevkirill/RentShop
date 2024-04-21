@@ -16,7 +16,7 @@ namespace VideoRentShop.WEB.Controllers.ViewControllers
                 case 500:
                     return base.View("ErrorPages/500");
                 default:
-                    throw new Exception("Не известный тип ошибки");
+                     throw new Exception("Произошла непредвиденная ошибка.");
             }
         }
     }

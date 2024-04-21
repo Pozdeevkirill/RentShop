@@ -15,9 +15,9 @@ namespace VideoRentShop.WEB.Controllers.API.Admin
 
 		[HttpPost]
 		[Route("upload")]
-		public ActionResult Upload([FromQuery] Guid itemId, [FromForm] List<IFormFile> files, [FromForm] int? mainFileIndex = null)
+		public ActionResult Upload([FromQuery] Guid itemId, [FromQuery] int mainFileId, [FromForm] List<IFormFile> files)
 		{
-			_fileAttachmentService.UploadFiles(itemId, files, mainFileIndex);
+			_fileAttachmentService.UploadFiles(itemId, files, mainFileId);
 			return Ok();
 		}
 	}

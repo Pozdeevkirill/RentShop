@@ -9,5 +9,10 @@
 		/// Ид предмета
 		/// </summary>
         public Guid ItemId { get; set; }
-    }
+
+		/// <summary>
+		/// Указатель на основкую картинку
+		/// </summary>
+		public bool IsMainFile { get; set; }
+	}
 }

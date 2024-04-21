@@ -1,0 +1,48 @@
+﻿<div class="pd-ltr-20 xs-pd-20-10">
+	<div class="min-height-200px">
+		<div class="page-header">
+			<div class="row">
+				<div class="col-md-6 col-sm-12">
+					<div class="title">
+						<h4>Список всех товаров</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-flex flex-wrap item-holder">
+		</div>
+		<div class="pagin"></div>
+	</div>
+</div>
+
+<script>
+	var pagination = new Pagination("api/item/get", ".pagin", 12, function(data) {
+		var result = '';
+		var cardHolder = document.querySelector(".item-holder");
+
+		var template = `
+			<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+				<div class="card card-box">
+					<img class="card-img-top"
+								src="data:image/png;base64,{fileByte}"
+							alt="Card image cap" />
+					<div class="card-body">
+						<h5 class="card-title weight-500">{name}</h5>
+						<p class="card-text">
+							{description}
+						</p>
+						<a href="#" class="btn btn-primary">Редактировать</a>
+					</div>
+				</div>
+			</div>
+			`;
+
+		for (var i = 0; i < data.length; i++) {
+			result += template.supplant({ name: data[i].name, description: data[i].description, fileByte: data[i].files.filter(x => x.isMainFile)[0].file });
+		}
+
+		cardHolder.innerHTML = result;
+	});
+	pagination.Init();
+	console.log(pagination);
+</script>
