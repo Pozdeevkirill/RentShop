@@ -42,28 +42,27 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 		{
 			if (request == null) throw new Exception("Запрос не может быть пустым!");
 
-			var result = new PaginationResponse<ItemVo>();
+			if (request.Take == 0) return new(null, 0);
 
-			if (request.Take == 0) return result;
+            var data = _itemRepository.GetAllIncluding(x => x.Files).Skip(request.Skip).Take(request.Take).Select(x => new ItemVo()
+            {
+                Id = x.Id,
+                Count = x.Count,
+                Name = x.Name,
+                Description = x.Description,
+                IsActive = x.IsActive,
+                Files = x.Files == null ? new() : x.Files.Select(y => new FileVo()
+                {
+                    FileName = y.FileName,
+                    SystemName = y.SystemName,
+                    MimeType = y.MimeType,
+                    File = y.File,
+                    IsMainFile = y.IsMainFile,
+                }).ToList()
+            }).ToList();
 
-			result.Data = _itemRepository.GetAllIncluding(x => x.Files).Skip(request.Skip).Take(request.Take).Select(x => new ItemVo()
-			{
-				Id = x.Id,
-				Count = x.Count,
-				Name = x.Name,
-				Description = x.Description,
-				IsActive = x.IsActive,
-				Files = x.Files == null ? new() : x.Files.Select(y => new FileVo()
-				{
-					FileName = y.FileName,
-					SystemName = y.SystemName,
-					MimeType = y.MimeType,
-					File = y.File,
-					IsMainFile = y.IsMainFile,
-				}).ToList()
-			}).ToList();
-
-			result.CountAll = _itemRepository.Count();
+			var countAll = _itemRepository.Count();
+            var result = new PaginationResponse<ItemVo>(data, countAll);
 
 			return result;
 		}

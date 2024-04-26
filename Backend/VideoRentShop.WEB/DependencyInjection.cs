@@ -32,6 +32,7 @@ namespace VideoRentShop.WEB
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IFileAttachmentService, FileAttachmentService>();
+            services.AddScoped<IUserService, UserService>();
 			#endregion
 
 			return services;

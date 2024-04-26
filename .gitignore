@@ -204,3 +204,9 @@ Backend/VideoRentShop.BAL/VideoRentShop.Services/obj
 Backend/VideoRentShop.DAL/VideoRentShop.Data/obj
 Backend/VideoRentShop.DAL/VideoRentShop.Migrations/obj
 Backend/VideoRentShop.DAL/VideoRentShop.Models/obj
+Backend/VideoRentShop.BAL/VideoRentShop.Services/bin
+Backend/VideoRentShop.BAL/VideoRentShop.Common/bin
+Backend/VideoRentShop.BAL/VideoRentShop.HttpModels/bin
+Backend/VideoRentShop.DAL/VideoRentShop.Migrations/bin
+Backend/VideoRentShop.DAL/VideoRentShop.Models/bin
+Backend/VideoRentShop.DAL/VideoRentShop.Data/bin
