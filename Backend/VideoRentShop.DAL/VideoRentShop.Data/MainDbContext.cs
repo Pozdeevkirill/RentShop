@@ -47,7 +47,7 @@ namespace VideoRentShop.Data
 
             try
             {
-               SaveChanges();
+                SaveChanges();
                 transaction.Commit();
             }
             catch

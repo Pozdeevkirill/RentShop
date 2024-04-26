@@ -20,6 +20,10 @@ function Pagination(url, pagingClass = '.paginationContainer', _itemsPearPage = 
             countAll = response.countAll;
             data = response.data;
 
+            if (data.length == 0 && currentPage != 1) {
+                _showPage(currentPage - 1);
+            }
+
             _createPageButtons();
             _updateActiveButtonStates();
 
@@ -65,7 +69,8 @@ function Pagination(url, pagingClass = '.paginationContainer', _itemsPearPage = 
         Init: _init,
         ShowPage: _showPage,
         CreatePageButtons: _createPageButtons,
-        UpdateActiveButtonStates: _updateActiveButtonStates
+        UpdateActiveButtonStates: _updateActiveButtonStates,
+        CurrentPage: currentPage,
     }
 }
 

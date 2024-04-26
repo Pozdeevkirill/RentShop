@@ -11,5 +11,7 @@ namespace VideoRentShop.Services.Interfaces.ShopServices
 		IdWithNameVo Create(AddItemRequest request);
 
 		PaginationResponse<ItemVo> GetItems(PaginationRequest request);
+
+		void RemoveItem(Guid itemId);
 	}
 }

@@ -35,76 +35,74 @@
 	</div>
 </div>
 
-	<script>
-		var pagination = new Pagination("api/user/get", ".pagin", 12, function (data) {
-			var result = '';
-			var cardHolder = document.querySelector(".user-body");
+<script>
+	var pagination = new Pagination("api/user/get", ".pagin", 12, function (data) {
+		var result = '';
+		var cardHolder = document.querySelector(".user-body");
 
-			var template = `
-							<tr>
-								<td class="table-plus">{name}</td>
-								<td>{login}</td>
-								<td>{role}</td>
-								<td>
-									<div class="dropdown">
-										<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-											href="#"
-											role="button"
-											data-toggle="dropdown">
-											<i class="dw dw-more"></i>
-										</a>
-										<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-											<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Редактировать</a>
-											<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Удалить</a>
-										</div>
+		var template = `
+						<tr>
+							<td class="table-plus">{name}</td>
+							<td>{login}</td>
+							<td>{role}</td>
+							<td>
+								<div class="dropdown">
+									<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+										href="#"
+										role="button"
+										data-toggle="dropdown">
+										<i class="dw dw-more"></i>
+									</a>
+									<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+										<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Редактировать</a>
+										<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Удалить</a>
 									</div>
-								</td>
-							</tr>
-					`;
+								</div>
+							</td>
+						</tr>
+				`;
 
-			for (var i = 0; i < data.length; i++) {
-				result += template.supplant({ name: data[i].name, login: data[i].login, role: data[i].roleName });
+		for (var i = 0; i < data.length; i++) {
+			result += template.supplant({ name: data[i].name, login: data[i].login, role: data[i].roleName });
+		}
+		cardHolder.innerHTML = result;
+	});
+
+	pagination.Init();
+
+	$('document').ready(function () {
+		$('.allUsers_table').DataTable({
+			scrollCollapse: true,
+			autoWidth: true,
+			responsive: true,
+			searching: false,
+			bLengthChange: false,
+			bPaginate: false,
+			bInfo: false,
+			columnDefs: [{
+				targets: "datatable-nosort",
+				orderable: false,
+			}],
+			"lengthMenu": [[1, 2, 5, 1], [1, 2, 5, 1]],
+			"language": {
+				"info": "_START_-_END_ of _TOTAL_ entries",
+				searchPlaceholder: "Search",
+				paginate: {
+					next: '<i class="ion-chevron-right"></i>',
+					previous: '<i class="ion-chevron-left"></i>'
+				}
+			},
+		});
+		var table = $('.select-row').DataTable();
+		$('.select-row tbody').on('click', 'tr', function () {
+			if ($(this).hasClass('selected')) {
+				$(this).removeClass('selected');
 			}
-			cardHolder.innerHTML = result;
+			else {
+				table.$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+			}
 		});
-
-		pagination.Init();
-
-
-
-		$('document').ready(function () {
-			$('.allUsers_table').DataTable({
-				scrollCollapse: true,
-				autoWidth: true,
-				responsive: true,
-				searching: false,
-				bLengthChange: false,
-				bPaginate: false,
-				bInfo: false,
-				columnDefs: [{
-					targets: "datatable-nosort",
-					orderable: false,
-				}],
-				"lengthMenu": [[1, 2, 5, 1], [1, 2, 5, 1]],
-				"language": {
-					"info": "_START_-_END_ of _TOTAL_ entries",
-					searchPlaceholder: "Search",
-					paginate: {
-						next: '<i class="ion-chevron-right"></i>',
-						previous: '<i class="ion-chevron-left"></i>'
-					}
-				},
-			});
-			var table = $('.select-row').DataTable();
-			$('.select-row tbody').on('click', 'tr', function () {
-				if ($(this).hasClass('selected')) {
-					$(this).removeClass('selected');
-				}
-				else {
-					table.$('tr.selected').removeClass('selected');
-					$(this).addClass('selected');
-				}
-			});
-		});
-	</script>
+	});
+</script>
 

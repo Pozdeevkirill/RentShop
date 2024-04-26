@@ -66,5 +66,17 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 
 			return result;
 		}
+
+		public void RemoveItem(Guid itemId)
+		{
+			var item = _itemRepository.Get(itemId);
+
+			if (item == null) throw new Exception("Товар с таким ИД не найден.");
+
+			_itemRepository.UnitOfWork.Execute(() =>
+			{
+				_itemRepository.Delete(item);
+			});
+		}
 	}
 }

@@ -30,5 +30,13 @@ namespace VideoRentShop.WEB.Controllers.API.Admin
 		{
 			return Ok(_itemService.GetItems(request));
 		}
+
+		[HttpPost]
+		[Route("remove")]
+		public ActionResult RemoveItem([FromBody]Guid itemId)
+		{
+			_itemService.RemoveItem(itemId);
+			return Ok();
+		}
 	}
 }

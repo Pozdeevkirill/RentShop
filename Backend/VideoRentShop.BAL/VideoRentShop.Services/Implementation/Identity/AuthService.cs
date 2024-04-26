@@ -31,10 +31,10 @@ namespace VideoRentShop.Services.Implementation.Identity
             if (request == null) throw new ArgumentNullException("request");
 
             var user = _userRepository.Get(request.Login);
-            //TODO: Переделать на выбрасывание ошибки кастомной 
-            if (user == null) return null;
-            //TODO: Переделать на выбрасывание ошибки кастомной
-            if (!PasswordHelper.VerifyHashedPassword(user.Password, request.Password)) return null;
+
+            if (user == null) throw new Exception("Неверный логин и/или пароль");
+
+            if (!PasswordHelper.VerifyHashedPassword(user.Password, request.Password)) throw new Exception("Неверный логин и/или пароль");
 
             var claims = new List<Claim>
             {
@@ -67,8 +67,7 @@ namespace VideoRentShop.Services.Implementation.Identity
         {
             if (request == null) throw new ArgumentNullException("request");
 
-            //TODO: Переделать на выбрасывание ошибки кастомной как на работе :)
-            if (_userRepository.Any(x => x.Login == request.Login)) return;
+            if (_userRepository.Any(x => x.Login == request.Login)) throw new Exception("Пользователь с такми логином уже зарегестрирован.");
 
             string hashedPassword = PasswordHelper.HashPassword(request.Password);
 
@@ -89,15 +88,14 @@ namespace VideoRentShop.Services.Implementation.Identity
             if (token.IsRevoked)
             {
                 _tokenService.RemoveTokenByUserId(user.Id);
-                //TODO: Выкидывать исключение NotAuth
-                return null;
+                throw new Exception("Ваша сессия завершена, пожалуйста, авторизуйтесь.");
             }
 
             //Если токен по каким-то причинам не активен
             if (!token.IsActive)
-                return null;
+				throw new Exception("Ваша сессия завершена, пожалуйста, авторизуйтесь.");
 
-            var newRefreshToken = _tokenService.GenerateRefreshToken();
+			var newRefreshToken = _tokenService.GenerateRefreshToken();
             _identityService.UpdateRefreshToken(user.Id, newRefreshToken);
 
             return null;

@@ -50,7 +50,7 @@ namespace VideoRentShop.Data.Interfaces
         IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate, bool asNoTracking = true);
 
         /// <summary>
-        /// Получить сущность по ИДы
+        /// Получить сущность по ИД
         /// </summary>
         /// <param name="id">ид сущности</param>
         TEntity? Get(Guid id);
