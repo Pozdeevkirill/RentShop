@@ -33,7 +33,7 @@ namespace VideoRentShop.WEB.Controllers.API.Admin
 
 		[HttpPost]
 		[Route("remove")]
-		public ActionResult RemoveItem([FromBody]Guid itemId)
+		public ActionResult RemoveItem([FromQuery]Guid itemId)
 		{
 			_itemService.RemoveItem(itemId);
 			return Ok();
