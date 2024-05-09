@@ -20,11 +20,6 @@ namespace VideoRentShop.Data.Implementations
             get => _context;
         }
 
-        public Query<TEntity> Query()
-        {
-            return new Query<TEntity>();
-        }
-
         public Guid Add(TEntity entity)
         {
             return _context.Set<TEntity>().Add(entity).Entity.Id;
@@ -122,7 +117,7 @@ namespace VideoRentShop.Data.Implementations
 			return _context.Set<TEntity>().Where(predicate).Skip(skip).Take(take).ToList();
 		}
 
-        public void Update(TEntity entity)
+		public void Update(TEntity entity)
         {
             _context.Set<TEntity>().Update(entity);
         }

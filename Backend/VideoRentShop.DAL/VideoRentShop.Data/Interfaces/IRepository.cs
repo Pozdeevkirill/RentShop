@@ -11,8 +11,6 @@ namespace VideoRentShop.Data.Interfaces
     {
         IUnitOfWork UnitOfWork { get; }
 
-        Query<TEntity> Query();
-
         /// <summary>
         /// Добавить сущность
         /// </summary>
