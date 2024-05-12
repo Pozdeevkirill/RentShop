@@ -13,10 +13,5 @@ namespace VideoRentShop.Data.Implementations.Identity
         {
             return base.Get(x => x.Login == login);
         }
-
-        public void Test(string t)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

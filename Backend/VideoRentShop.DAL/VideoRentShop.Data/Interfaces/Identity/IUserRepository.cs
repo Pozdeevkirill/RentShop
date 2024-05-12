@@ -8,7 +8,5 @@ namespace VideoRentShop.Data.Interfaces.Identity
         /// Получить пользователя по логину<br/>
         /// </summary>
         User Get(string login);
-
-        void Test(string t);
     }
 }

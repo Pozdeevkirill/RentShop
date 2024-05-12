@@ -19,10 +19,22 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 
         public PaginationResponse<UserVo> GetAll(PaginationRequest req)
         {
-            var users = _userRepository.ListToPagin(req.Take, req.Skip).Select(x => new UserVo(x.Login, x.Name, x.Role.GetEnumDescription())).ToList();
+            var users = _userRepository.ListToPagin(req.Take, req.Skip).Where(x => !x.IsDeleted).Select(x => new UserVo(x.Id, x.Login, x.Name, x.Role.GetEnumDescription())).ToList();
             var count = _userRepository.Count();
 
             return new(users, count);
         }
+
+        public void RemoveUser(Guid id)
+        {
+			var user = _userRepository.Get(id);
+
+			if (user == null) throw new Exception("Пользователь с таким ИД не найден.");
+
+			_userRepository.UnitOfWork.Execute(() =>
+			{
+				user.Delete();
+			});
+		}
     }
 }

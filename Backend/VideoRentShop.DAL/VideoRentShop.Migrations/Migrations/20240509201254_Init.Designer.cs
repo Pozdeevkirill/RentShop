@@ -12,8 +12,8 @@ using VideoRentShop.Data;
 namespace VideoRentShop.Migrations.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20240421160451_AddMainFileId")]
-    partial class AddMainFileId
+    [Migration("20240509201254_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,6 +30,9 @@ namespace VideoRentShop.Migrations.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Login")
                         .IsRequired()
@@ -51,7 +54,33 @@ namespace VideoRentShop.Migrations.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("VideoRentShop.Models.Shop.FileAttachment", b =>
+            modelBuilder.Entity("VideoRentShop.Models.Shop.Banner", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ImageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
+
+                    b.ToTable("Banners");
+                });
+
+            modelBuilder.Entity("VideoRentShop.Models.Shop.File.FileAttachment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -62,6 +91,9 @@ namespace VideoRentShop.Migrations.Migrations
                         .HasMaxLength(21)
                         .HasColumnType("nvarchar(21)");
 
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<byte[]>("File")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
@@ -69,6 +101,9 @@ namespace VideoRentShop.Migrations.Migrations
                     b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("MimeType")
                         .IsRequired()
@@ -87,6 +122,40 @@ namespace VideoRentShop.Migrations.Migrations
                     b.UseTphMappingStrategy();
                 });
 
+            modelBuilder.Entity("VideoRentShop.Models.Shop.Header", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BackgroundImageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Label")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubLabel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BackgroundImageId");
+
+                    b.ToTable("Headers");
+                });
+
             modelBuilder.Entity("VideoRentShop.Models.Shop.Item", b =>
                 {
                     b.Property<Guid>("Id")
@@ -103,46 +172,29 @@ namespace VideoRentShop.Migrations.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("VideoRentShop.Models.Shop.Price", b =>
+            modelBuilder.Entity("VideoRentShop.Models.Shop.File.ItemFile", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ItemId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double>("PriceValue")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Time")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
-
-                    b.ToTable("Prices");
-                });
-
-            modelBuilder.Entity("VideoRentShop.Models.Shop.ItemFile", b =>
-                {
-                    b.HasBaseType("VideoRentShop.Models.Shop.FileAttachment");
+                    b.HasBaseType("VideoRentShop.Models.Shop.File.FileAttachment");
 
                     b.Property<bool>("IsMainFile")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ItemId")
+                    b.Property<Guid?>("ItemId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasIndex("ItemId");
@@ -150,27 +202,36 @@ namespace VideoRentShop.Migrations.Migrations
                     b.HasDiscriminator().HasValue("ItemFile");
                 });
 
-            modelBuilder.Entity("VideoRentShop.Models.Shop.Price", b =>
+            modelBuilder.Entity("VideoRentShop.Models.Shop.Banner", b =>
                 {
-                    b.HasOne("VideoRentShop.Models.Shop.Item", null)
-                        .WithMany("Prices")
-                        .HasForeignKey("ItemId");
+                    b.HasOne("VideoRentShop.Models.Shop.File.FileAttachment", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Image");
                 });
 
-            modelBuilder.Entity("VideoRentShop.Models.Shop.ItemFile", b =>
+            modelBuilder.Entity("VideoRentShop.Models.Shop.Header", b =>
+                {
+                    b.HasOne("VideoRentShop.Models.Shop.File.FileAttachment", "BackgroundImage")
+                        .WithMany()
+                        .HasForeignKey("BackgroundImageId");
+
+                    b.Navigation("BackgroundImage");
+                });
+
+            modelBuilder.Entity("VideoRentShop.Models.Shop.File.ItemFile", b =>
                 {
                     b.HasOne("VideoRentShop.Models.Shop.Item", null)
                         .WithMany("Files")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ItemId");
                 });
 
             modelBuilder.Entity("VideoRentShop.Models.Shop.Item", b =>
                 {
                     b.Navigation("Files");
-
-                    b.Navigation("Prices");
                 });
 #pragma warning restore 612, 618
         }

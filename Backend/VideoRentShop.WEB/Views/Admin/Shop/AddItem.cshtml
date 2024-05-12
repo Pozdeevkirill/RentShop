@@ -97,6 +97,15 @@
 					</div>
 				</div>
 
+				@* Цена товара *@
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Цена за смену</label>
+					<div class="col-sm-12 col-md-10">
+						<input type="number" class="form-control" id="priceInput" name="Price" min="0" value="0">
+						<div class="form-control-feedback danger-text">Это обязательное поле. Значение должно быть больше 0.</div>
+					</div>
+				</div>
+
 				@* Активный товар *@
 				<div class="form-group row">
 					<label class="col-sm-12 col-md-2 col-form-label">&emsp;</label>
@@ -136,18 +145,19 @@
 	let imageContainer = document.getElementById("images");
 	let numOfFiles = document.getElementById("num-of-files");
 
-	var nameInput = new Input("#nameInput", true);
-
+	var nameInput = new Input("#nameInput", true,0);
+	var priceInput = new Input("#priceInput", true, 1);
 
 
 
 	$('#addItem').on('click', function () {
 
-		if (nameInput.isValid()) {
+		if (nameInput.isValid() && priceInput.isValid() && $("#file-input")[0].files.length) {
 			var result = {
 				Name: $("#nameInput").val(),
 				Description: $('iframe').contents().find('.wysihtml5-editor').html(),
 				IsActive: $("#isActiveInput").is(":checked"),
+				Price: $("#priceInput").val(),
 			};
 
 			http.post('/api/item/addItem', result, (response) => {
@@ -162,7 +172,7 @@
 
 				$.ajax({
 					type: "POST",
-					url: `/api/file/upload?itemId=${response.id}&mainFileId=${mainIndex.value}`,
+					url: `/api/file/uploadFiles?itemId=${response.id}&mainFileId=${mainIndex.value}`,
 					data: data,
 					processData: false,
 					contentType: false,

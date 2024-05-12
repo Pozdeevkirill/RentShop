@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using VideoRentShop.Data.Interfaces;
 using VideoRentShop.Models.Identity;
 using VideoRentShop.Models.Shop;
+using VideoRentShop.Models.Shop.File;
 
 namespace VideoRentShop.Data
 {
@@ -10,14 +11,22 @@ namespace VideoRentShop.Data
     {
         public DbSet<User> Users => Set<User>();
         public DbSet<Item> Items => Set<Item>();
-        public DbSet<Price> Prices => Set<Price>();
         public DbSet<FileAttachment> FileAttachments => Set<FileAttachment>();
         public DbSet<ItemFile> ItemFiles => Set<ItemFile>();
+        public DbSet<Banner> Banners => Set<Banner>();
+        public DbSet<Header> Headers => Set<Header>();
 
 		public MainDbContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            ///TODO: мапинг, что бы в таблице FileAttachments не создавалось миллион полей с сылками на родительскую сущность
+            ///а наоборот, все эти ссылки хранились в поле EntityId
+            ///Стоит поменять, что бы постоянно не писать подобные маппинги для подобных моделей со связью one-to-many
+            modelBuilder.Entity<Item>()
+                .HasMany(x => x.Files)
+                .WithOne()
+                .HasForeignKey(x => x.EntityId);
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

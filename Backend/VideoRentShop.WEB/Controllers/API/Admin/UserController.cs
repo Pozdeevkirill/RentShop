@@ -35,5 +35,14 @@ namespace VideoRentShop.WEB.Controllers.API.Admin
 		{
 			return Ok(_userService.GetAll(req));
 		}
+
+		[HttpPost]
+		[Route("remove")]
+		[Authorize(Roles = "Admin")]
+		public ActionResult RemoveUser([FromQuery] Guid id)
+		{
+			_userService.RemoveUser(id);
+			return Ok();
+		}
 	}
 }

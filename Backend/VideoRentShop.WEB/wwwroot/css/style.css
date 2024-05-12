@@ -301,6 +301,23 @@
     display: none;
 }
 
+.pagin {
+    display: flex;
+}
+
+.pagin button {
+    padding: 20px;
+    border-radius: 50px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-color: #1b00ff;
+    color: #1b00ff;
+    margin-right: 1%;
+}
 .img-holder {
     width: 100%;
     height: 220px;
@@ -308,9 +325,9 @@
 }
 
 .img-holder img {
-    width: 100%; /* Ширина изображений */
-    height: 100%; /* Высота изображении */
-    object-fit: cover; /* Вписываем фотографию в область */
+    width: 100%; /* пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+    height: 100%; /* пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+    object-fit: cover; /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
 }
 
 .item-card__btn-holder {
@@ -344,4 +361,45 @@
 .btn-blue:hover {
     color: #5f95ed;
     border-color: #5f95ed;
+}
+
+.btn-green {
+    color: #00bf06;
+    border-color: #00bf06;
+}
+
+.btn-green:hover {
+    color: #4fff55;
+    border-color: #4fff55;
+}
+
+.truncate-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.3em;
+    height: 2.6em;
+}
+
+.activeHeader {
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    left: 86%;
+    font-size: 160%;
+}
+
+.headerCard {
+    background: #000;
+}
+
+.headerCard img {
+    opacity: 0.6;
+}
+
+.header_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }

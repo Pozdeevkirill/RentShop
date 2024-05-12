@@ -38,5 +38,17 @@ namespace VideoRentShop.WEB.Controllers.ViewControllers.Admin
         {
             return PartialView($"{_defaultViewFolder}/Shop/AllItems");
         }
+
+        [Route("addHeader")]
+        public ActionResult ViewAddHeader()
+        {
+            return PartialView($"{_defaultViewFolder}/Customize/Header/CreateHeader");
+        }
+
+        [Route("allHeaders")]
+        public ActionResult ViewAllHeader()
+        {
+            return PartialView($"{_defaultViewFolder}/Customize/Header/AllHeaders");
+        }
     }
 }

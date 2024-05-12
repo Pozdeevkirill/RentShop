@@ -21,15 +21,9 @@
         public bool IsActive { get; set; }
 
         /// <summary>
-		/// Цены на товар
+		/// Цены на товар за смену
 		/// </summary>
-		//public List<PriceRequest> Prices { get; set; }
+		public decimal Price { get; set; }
 
-    }
-
-	public class PriceRequest : IBaseRequest
-	{
-        public string Time { get; set; }
-        public double Price { get; set; }
     }
 }

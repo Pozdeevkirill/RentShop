@@ -1,4 +1,6 @@
-﻿namespace VideoRentShop.Models.Shop
+﻿using VideoRentShop.Models.Shop.File;
+
+namespace VideoRentShop.Models.Shop
 {
     public class Item : Entity
     {
@@ -13,9 +15,9 @@
         public string Description { get; set; }
 
         /// <summary>
-        /// Цена на товар
+        /// Цена на товар за смену
         /// </summary>
-        public List<Price>? Prices { get; set; }
+        public decimal Price { get; set; } 
 
         /// <summary>
         /// Активный товара(Находится на продаже)

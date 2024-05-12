@@ -25,7 +25,8 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 				Count = 0,
 				Description = request.Description,
 				IsActive = request.IsActive,
-				Name = request.Name
+				Name = request.Name,
+				Price = request.Price,
 			};
 
 			IdWithNameVo result = new(Guid.Empty, request.Name);
@@ -42,9 +43,11 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 		{
 			if (request == null) throw new Exception("Запрос не может быть пустым!");
 
-			if (request.Take == 0) return new(null, 0);
+			if(request.Skip < 0) request.Skip = 0;
 
-            var data = _itemRepository.GetAllIncluding(x => x.Files).Skip(request.Skip).Take(request.Take).Select(x => new ItemVo()
+			if (request.Take <= 0) return new(null, 0);
+
+            var data = _itemRepository.GetAllIncluding(x => x.Files).Where(x => !x.IsDeleted).Skip(request.Skip).Take(request.Take).Select(x => new ItemVo()
             {
                 Id = x.Id,
                 Count = x.Count,
@@ -75,7 +78,7 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 
 			_itemRepository.UnitOfWork.Execute(() =>
 			{
-				_itemRepository.Delete(item);
+				item.Delete();
 			});
 		}
 	}

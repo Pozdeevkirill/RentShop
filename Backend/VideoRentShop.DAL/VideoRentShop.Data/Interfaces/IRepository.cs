@@ -37,6 +37,11 @@ namespace VideoRentShop.Data.Interfaces
         void Update(TEntity entity);
 
         /// <summary>
+        /// Обновить сущности
+        /// </summary>
+        void Update(IList<TEntity> entities);
+
+        /// <summary>
         /// Получить все сущности
         /// </summary>
         /// <param name="asNoTracking">Сохранять ли полученные данные в КЕШ</param>

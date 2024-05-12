@@ -1,6 +1,6 @@
 ﻿namespace VideoRentShop.HttpModels.ViewObjects
 {
-	public class FileVo
+	public class FileVo : EntityVo
 	{
 		/// <summary>
 		/// Название файла

@@ -3,12 +3,12 @@
 }
 
 <!-- start main-banner -->
-<div class="main-banner">
+<div class="main-banner" id="main-banner">
     <div class="container">
         <div class="text">
-            <h6>Liberty NFT Market</h6>
-            <h2>Create, Sell & Collect Top NFT’s.</h2>
-            <p>
+            <h6 id="subtitle">Liberty NFT Market</h6>
+            <h2 id="title">Create, Sell & Collect Top NFT’s.</h2>
+            <p id="description">
                 Liberty NFT Market is a really cool and professional design for your NFT websites. This HTML CSS template is based on Bootstrap v5 and it is designed for NFT related web portals. Liberty can be freely downloaded from TemplateMo's free css templates.
             </p>
             <div class="buttons">
@@ -583,3 +583,20 @@
     </div>
 </div>
 <!-- end currently-market -->
+
+@section Scripts {
+    <script>
+        let title = document.querySelector("#title");
+        let subtitle = document.querySelector("#subtitle");
+        let description = document.querySelector("#description");
+        http.get(`/api/initHeader`, (response) => {
+            title.textContent = response.label;
+            subtitle.textContent = response.subLabel;
+            description.textContent = response.description;
+
+            if (response.backgroundFile != null && response.backgroundFile != undefined) {
+                document.querySelector(".main-banner").style.backgroundImage = `url("data:image/png;base64,${response.backgroundFile}")`
+            }
+        });
+    </script>
+}

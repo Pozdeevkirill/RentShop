@@ -42,12 +42,12 @@ namespace VideoRentShop.Data.Implementations
 
         public int Count()
         {
-            return _context.Set<TEntity>().Count();
+            return _context.Set<TEntity>().Where(x => !x.IsDeleted).Count();
         }
 
         public int Count(Expression<Func<TEntity, bool>> predicate)
         {
-            return _context.Set<TEntity>().Where(predicate).Count();
+            return _context.Set<TEntity>().Where(x => !x.IsDeleted).Where(predicate).Count();
         }
 
         public void Delete(TEntity entity)
@@ -67,23 +67,23 @@ namespace VideoRentShop.Data.Implementations
 
         public TEntity? Get(Expression<Func<TEntity, bool>> predicate)
         {
-            return _context.Set<TEntity>().FirstOrDefault(predicate);
+            return _context.Set<TEntity>().Where(x => !x.IsDeleted).FirstOrDefault(predicate);
         }
 
         public IQueryable<TEntity> GetAll(bool asNoTracking = true)
         {
             if (asNoTracking)
-                return _context.Set<TEntity>().AsNoTracking();
+                return _context.Set<TEntity>().Where(x => !x.IsDeleted).AsNoTracking();
             else
-                return _context.Set<TEntity>().AsQueryable();
+                return _context.Set<TEntity>().Where(x => !x.IsDeleted).AsQueryable();
         }
 
         public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate, bool asNoTracking = true)
         {
             if (asNoTracking)
-                return _context.Set<TEntity>().Where(predicate).AsNoTracking();
+                return _context.Set<TEntity>().Where(x => !x.IsDeleted).Where(predicate).AsNoTracking();
             else
-                return _context.Set<TEntity>().Where(predicate).AsQueryable();
+                return _context.Set<TEntity>().Where(x => !x.IsDeleted).Where(predicate).AsQueryable();
         }
 
         public IQueryable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] includeProperties)
@@ -109,6 +109,8 @@ namespace VideoRentShop.Data.Implementations
 
 		public IList<TEntity> ListToPagin(int take, int skip)
 		{
+            if (skip < 0) skip = 0;
+            if (take < 0) take = 0;
             return _context.Set<TEntity>().Skip(skip).Take(take).ToList();
 		}
 
@@ -120,6 +122,11 @@ namespace VideoRentShop.Data.Implementations
 		public void Update(TEntity entity)
         {
             _context.Set<TEntity>().Update(entity);
+        }
+
+        public void Update(IList<TEntity> entities)
+        {
+            _context.Set<TEntity>().UpdateRange(entities);
         }
     }
 }

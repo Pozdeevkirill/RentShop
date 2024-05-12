@@ -33,9 +33,9 @@
 						<p class="card-text">
 							{description}
 						</p>
-							<div class="item-card__btn-holder">
-								<a href="#" class="btn-circle btn-blue"><i class="dw dw-edit2"></i></a>
-								<a href="#" class="btn-circle btn-red" onClick="RemoveItem('{itemId}')"><i class="dw dw-delete-3"></i></a>
+						<div class="item-card__btn-holder">
+							<a href="#" class="btn-circle btn-blue"><i class="dw dw-edit2"></i></a>
+							<a href="#" class="btn-circle btn-red" onClick="RemoveItem('{itemId}')"><i class="dw dw-delete-3"></i></a>
 						</div>
 					</div>
 				</div>
@@ -43,13 +43,18 @@
 			`;
 
 		for (var i = 0; i < data.length; i++) {
-			result += template.supplant({ name: data[i].name, description: data[i].description, fileByte: data[i].files.filter(x => x.isMainFile)[0].file, itemId: data[i].id });
+			console.log(data[i]);
+			result += template.supplant({ name: data[i].name, 
+										description: data[i].description, 
+										fileByte: data[i].files.filter(x => x.isMainFile)[0].file, 
+										itemId: data[i].id });
 		}
 
 		cardHolder.innerHTML = result;
 	});
+
 	pagination.Init();
-	console.log(pagination);
+
 
 	function RemoveItem(id) {
 		http.post(`/api/item/remove?itemId=${id}`, { }, () => {

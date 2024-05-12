@@ -37,8 +37,6 @@
 			success: (response) => successCallback(response),
 			error: (response) => errorCallback(response.responseJSON)
 		});
-
-		//_clearPost(url, data.serialize(), "application/x-www-form-urlencoded; charset=UTF-8", successCallback);
 	}
 
 	var _clearPost = function (url, data, reqContentType, successCallback) {

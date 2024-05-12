@@ -1,9 +1,10 @@
 ﻿namespace VideoRentShop.HttpModels.ViewObjects
 {
-    public class UserVo
+    public class UserVo : EntityVo
     {
-        public UserVo(string login, string name, string roleName)
+        public UserVo(Guid id,string login, string name, string roleName)
         {
+            Id = id;
             Login = login;
             Name = name;
             RoleName = roleName;

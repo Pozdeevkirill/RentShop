@@ -5,7 +5,7 @@ using VideoRentShop.HttpModels.Requests.Identity;
 namespace VideoRentShop.Services.Interfaces.Identity
 {
     /// <summary>
-    /// Сервис для MVC версии проекта
+    /// Сервис авторизации для MVC версии проекта
     /// </summary>
     public interface IWebAuthService : IService
     {

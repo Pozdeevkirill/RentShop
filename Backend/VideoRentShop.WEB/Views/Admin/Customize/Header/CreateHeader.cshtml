@@ -1,0 +1,187 @@
+﻿<link rel="stylesheet"
+	  type="text/css"
+	  href="~/AdminTemplate/plugins/cropperjs/dist/cropper.css"/>
+<div class="pd-ltr-20 xs-pd-20-10">
+	<div class="min-height-200px">
+		<div class="page-header">
+			<div class="row">
+				<div class="col-md-6 col-sm-12">
+					<div class="title">
+						<h4>Создание нового описания баннера</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Default Basic Forms Start -->
+		<div class="pd-20 card-box mb-30">
+			<form name="addHeaderForm" id="addHeaderForm">
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Заголовок</label>
+					<div class="col-sm-12 col-md-10">
+						<input type="text" class="form-control" id="titleInput" name="Label">
+						<div class="form-control-feedback danger-text">Это обязательное поле</div>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Подзаголовок</label>
+					<div class="col-sm-12 col-md-10">
+						<input type="text" class="form-control" id="subtitleInput" name="Syblabel">
+						<div class="form-control-feedback danger-text">Это обязательное поле</div>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Описание</label>
+					<div class="col-sm-12 col-md-10">
+						<textarea class="form-control" id="descriptionInput" name="Description"></textarea>
+						<div class="form-control-feedback danger-text">Это обязательное поле</div>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">&emsp;</label>
+					<div class="custom-control custom-checkbox"
+						 data-toggle="tooltip" title="Данное описание сразу попадет на главную страницу и его увидят пользователи" data-placement="top">
+						<input type="checkbox"
+							   class="custom-control-input col-sm-12 col-md-10"
+							   id="isActiveInput"
+							   name="IsActive" />
+						<label class="custom-control-label" for="isActiveInput">Активный по умолчанию</label>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Задний фон</label>
+					<div class="col-sm-12 col-md-10">
+						<input type="file" name="Images" id="file-input" accept="image/png, image/jpeg" multiple>
+						<label for="file-input" class="file">
+							<i class="fas fa-upload"></i> &nbsp; Добавить
+						</label>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Задний фон</label>
+					<div class="col-sm-12 col-md-10">
+						<div>
+							<img src="~/MainTemplate/images/banner-bg.jpg" id="image"/>
+						</div>
+						<img src="" id="imageOutput" />
+
+						<label for="file-input2" class="file">
+							<i class="fas fa-upload"></i> &nbsp; Добавить
+							<input type="file" name="Images" id="file-input2" accept="image/png, image/jpeg" multiple>
+						</label>
+					</div>
+				</div>
+			</form>
+			<button type="button" class="btn btn-outline-primary" id="addHeader">
+				Добавить
+			</button>
+		</div>
+	</div>
+</div>
+
+<script>
+	///TODO: Убраться
+	$(function () {
+		const image = $("#image")[0];
+
+		let option = {
+			aspectRatio: 16 / 9,
+			viewMode: 3
+		};
+
+		var cropper = new Cropper(image, option);
+
+		$("#file-input2").on("change", function () {
+			var files = event.target.files;
+
+			console.log(files);
+
+			if (files && files.length > 0) {
+				let file = files[0];
+
+				let reader = new FileReader();
+
+				reader.onload = function (e) {
+					image.src = e.target.result;
+
+					cropper.destroy();
+					cropper = new Cropper(image, option)
+				}
+
+				reader.readAsDataURL(file);
+			}
+		})
+
+		var titleInput = new Input("#titleInput", true, 0);
+		var subtitileInput = new Input("#subtitleInput", true, 0);
+		var descriptionInput = new Input("#descriptionInput", true, 0);
+		var image_container = document.querySelector("#image");
+		var image_input = document.querySelector("#file-input");
+
+		var roleSelect = $("#roleSelect");
+		var rolesList = null;
+
+		$("#addHeader").on('click', () => {
+
+			if (titleInput.isValid() && subtitileInput.isValid() && descriptionInput.isValid()) {
+				var result = {
+					Label: $("#titleInput").val(),
+					SubLabel: $("#subtitleInput").val(),
+					Description: $("#descriptionInput").val(),
+					IsActive: $("#isActiveInput").is(":checked"),
+				};
+
+
+			http.post('/api/customize/header/create', result, (response) => {
+
+
+				debugger;
+
+
+					var canvas = cropper.getCroppedCanvas({
+						width: 160,
+						height: 160,
+					});
+
+					var imageData = canvas.toDataURL();
+				canvas.toBlob(function (blob) {
+						var formData = new FormData();
+						formData.append('file', blob);
+						$.ajax({
+							type: "POST",
+							url: `/api/file/upload?entityId=${response.id}`,
+							data: formData,
+							processData: false,
+							contentType: false,
+							success: function (response) {
+								Swal.fire({
+									title: "Успех!",
+									text: `Товар успешно создан!`,
+									icon: "success"
+								});
+							},
+							error: function (response) {
+								Swal.fire({
+									title: "Упс..",
+									text: `При создании товара произошла ошибка.`,
+									icon: "error"
+								});
+							}
+						});
+				})
+				});
+			} else {
+				Swal.fire({
+					title: "Упс..",
+					text: `Не все обязательные поля заполнены.`,
+					icon: "error"
+				});
+			}
+		});
+	});
+
+</script>
