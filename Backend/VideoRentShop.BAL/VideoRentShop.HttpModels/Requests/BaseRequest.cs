@@ -3,7 +3,7 @@
     /// <summary>
     /// Базовый класс запросов на АПИ
     /// </summary>
-    public class BaseRequest
+    public abstract class BaseRequest
     {
     }
 }

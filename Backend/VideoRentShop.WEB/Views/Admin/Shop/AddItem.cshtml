@@ -140,7 +140,6 @@
 
 <script>
 	var editor = $('.textarea_editor').wysihtml5();
-	console.log("Test")
 	let fileInput = document.getElementById("file-input");
 	let imageContainer = document.getElementById("images");
 	let numOfFiles = document.getElementById("num-of-files");
@@ -208,7 +207,6 @@
 		imageContainer.className = "card-holder";
 		let p = 0;
 
-		console.log(fileInput.files);
 		for (i of fileInput.files) {
 			let reader = new FileReader();
 			let li = document.createElement("li");

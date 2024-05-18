@@ -1,4 +1,4 @@
-﻿	using VideoRentShop.HttpModels.Requests;
+﻿using VideoRentShop.HttpModels.Requests;
 using VideoRentShop.HttpModels.Requests.Admin;
 using VideoRentShop.HttpModels.Responses;
 using VideoRentShop.HttpModels.ViewObjects;
@@ -19,8 +19,19 @@ namespace VideoRentShop.Services.Interfaces.ShopServices
 		PaginationResponse<ItemVo> GetItems(PaginationRequest request);
 
 		/// <summary>
+		/// Получение предмета по Id
+		/// </summary>
+		ItemVo Get(Guid id);
+
+		/// <summary>
 		/// Удалить товар
 		/// </summary>
 		void RemoveItem(Guid itemId);
+
+		/// <summary>
+		/// Редактирование товара
+		/// </summary>
+		/// <param name="request"></param>
+		void Edit(EditItemRequest request);
 	}
 }

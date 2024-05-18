@@ -1,4 +1,5 @@
-﻿using VideoRentShop.Data.Interfaces;
+﻿using VideoRentShop.Common;
+using VideoRentShop.Data.Interfaces;
 using VideoRentShop.HttpModels.Requests;
 using VideoRentShop.HttpModels.Requests.Admin;
 using VideoRentShop.HttpModels.Responses;
@@ -9,7 +10,7 @@ using VideoRentShop.Services.Interfaces.ShopServices;
 
 namespace VideoRentShop.Services.Implementation.ShopServices
 {
-	public class ItemService : IItemService
+    public class ItemService : IItemService
 	{
 		private readonly IRepository<Item> _itemRepository;
 
@@ -39,9 +40,57 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 			return result;
 		}
 
-		public PaginationResponse<ItemVo> GetItems(PaginationRequest request)
+        public void Edit(EditItemRequest request)
+        {
+			if (request == null) throw new Exception(ErrorMessages.RequestEmptyError);
+
+			var curItem = _itemRepository.List(x => x.Id == request.Id).Select(x => new Item()
+			{
+				Id = x.Id,
+				Count = x.Count,
+				Description = x.Description,
+				IsActive = x.IsActive,
+				Name = x.Name,
+				Price = x.Price,
+			}).Single();
+
+			//Не делаю проверку на нул, т.к. используем сингл
+
+			if (curItem.Name == request.Name &&
+				curItem.Description == request.Description &&
+				curItem.Price == request.Price) throw new Exception(ErrorMessages.EntityNotChangedError);
+
+			curItem.Name = request.Name;
+			curItem.Description = request.Description;
+			curItem.Price = request.Price;
+
+			_itemRepository.UnitOfWork.Execute(() =>
+			{
+				_itemRepository.Update(curItem);
+			});
+        }
+
+        public ItemVo Get(Guid id)
+        {
+			if (id == Guid.Empty) throw new Exception(ErrorMessages.IdCantBeNullError);
+
+			var item = _itemRepository.List(x => x.Id == id).Select(x => new ItemVo()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Description = x.Description,
+                IsActive = x.IsActive,
+                Count = x.Count,
+				Price = x.Price,
+            }).Single();
+			if (item == null) throw new Exception(ErrorMessages.NotFoundByIdError);
+
+			return item;
+        }
+
+        public PaginationResponse<ItemVo> GetItems(PaginationRequest request)
 		{
-			if (request == null) throw new Exception("Запрос не может быть пустым!");
+			if (request == null) throw new Exception(ErrorMessages.RequestEmptyError);
 
 			if(request.Skip < 0) request.Skip = 0;
 
@@ -54,6 +103,7 @@ namespace VideoRentShop.Services.Implementation.ShopServices
                 Name = x.Name,
                 Description = x.Description,
                 IsActive = x.IsActive,
+				Price = x.Price,
                 Files = x.Files == null ? new() : x.Files.Select(y => new FileVo()
                 {
                     FileName = y.FileName,
@@ -74,7 +124,7 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 		{
 			var item = _itemRepository.Get(itemId);
 
-			if (item == null) throw new Exception("Товар с таким ИД не найден.");
+			if (item == null) throw new Exception(ErrorMessages.NotFoundByIdError);
 
 			_itemRepository.UnitOfWork.Execute(() =>
 			{

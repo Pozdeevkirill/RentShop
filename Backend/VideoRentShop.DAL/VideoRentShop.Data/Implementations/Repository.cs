@@ -97,14 +97,14 @@ namespace VideoRentShop.Data.Implementations
             return queryable;
         }
 
-        public IList<TEntity> List()
+        public IQueryable<TEntity> List()
         {
-            return _context.Set<TEntity>().ToList();
+            return _context.Set<TEntity>();
         }
 
-        public IList<TEntity> List(Expression<Func<TEntity, bool>> predicate)
+        public IQueryable<TEntity> List(Expression<Func<TEntity, bool>> predicate)
         {
-            return _context.Set<TEntity>().Where(predicate).ToList();
+            return _context.Set<TEntity>().Where(predicate);
         }
 
 		public IList<TEntity> ListToPagin(int take, int skip)

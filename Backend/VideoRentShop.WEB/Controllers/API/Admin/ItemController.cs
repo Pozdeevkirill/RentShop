@@ -25,10 +25,17 @@ namespace VideoRentShop.WEB.Controllers.API.Admin
 		}
 
 		[HttpGet]
-		[Route("get")]
+		[Route("getAll")]
         public ActionResult GetItems([FromQuery]PaginationRequest request)
 		{
 			return Ok(_itemService.GetItems(request));
+		}
+
+		[HttpGet]
+		[Route("get")]
+		public ActionResult GetItem([FromQuery]Guid itemId)
+		{
+			return Ok(_itemService.Get(itemId));
 		}
 
 		[HttpPost]
@@ -36,6 +43,14 @@ namespace VideoRentShop.WEB.Controllers.API.Admin
 		public ActionResult RemoveItem([FromQuery] Guid itemId)
 		{
 			_itemService.RemoveItem(itemId);
+			return Ok();
+		}
+
+		[HttpPost]
+		[Route("edit")]
+		public ActionResult EditItem([FromBody] EditItemRequest request)
+		{
+			_itemService.Edit(request);
 			return Ok();
 		}
 	}

@@ -1,0 +1,121 @@
+﻿<link rel="stylesheet"
+	  type="text/css"
+	  href="~/AdminTemplate/plugins/cropperjs/dist/cropper.css" />
+<div class="pd-ltr-20 xs-pd-20-10">
+	<div class="min-height-200px">
+		<div class="page-header">
+			<div class="row">
+				<div class="col-md-6 col-sm-12">
+					<div class="title">
+						<h4>Редактирование банера</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Default Basic Forms Start -->
+		<div class="pd-20 card-box mb-30">
+			<form name="editHeaderForm" id="editHeaderForm">
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Заголовок</label>
+					<div class="col-sm-12 col-md-10">
+						<input type="text" class="form-control" id="titleInput" name="Label" onchange="dirtyForm()">
+						<div class="form-control-feedback danger-text">Это обязательное поле</div>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Подзаголовок</label>
+					<div class="col-sm-12 col-md-10">
+						<input type="text" class="form-control" id="subtitleInput" name="Syblabel" onchange="dirtyForm()">
+						<div class="form-control-feedback danger-text">Это обязательное поле</div>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-12 col-md-2 col-form-label">Описание</label>
+					<div class="col-sm-12 col-md-10">
+						<textarea class="form-control" id="descriptionInput" name="Description" onchange="dirtyForm()"></textarea>
+						<div class="form-control-feedback danger-text">Это обязательное поле</div>
+					</div>
+				</div>
+			</form>
+			<button type="button" class="btn btn-outline-primary" id="saveHeader" disabled>
+				Сохранить
+			</button>
+			<button type="button" class="btn btn-outline-primary" id="addHeader" onclick="loadPartial('admin/allHeaders', this)">
+				Отмена
+			</button>
+		</div>
+	</div>
+</div>
+
+<script>
+	var editTitleInput = new Input("#titleInput", true, 0);
+	var editSubtitileInput = new Input("#subtitleInput", true, 0);
+	var editDescriptionInput = new Input("#descriptionInput", true, 0);
+
+
+	editLabel = $("#titleInput");
+	editSubLabel = $("#subtitleInput");
+	editDescription = $("#descriptionInput");
+
+	Init();
+
+	var oldObject = {};
+	function Init() {
+		http.get(`/api/customize/header/get?headerId=${$scope.itemId}`, (response) => {
+			oldObject = response;
+
+			editLabel.val(response.label);
+			editTitleInput.validate();
+			editSubLabel.val(response.subLabel);
+			editSubtitileInput.validate();
+			editDescription.val(response.description);
+			editDescriptionInput.validate();
+		});
+	}
+
+	formDirty = false;
+
+	function dirtyForm() {
+		if (oldObject.label != editLabel.val() ||
+			oldObject.subLabel != editSubLabel.val() ||
+			oldObject.description != editDescription.val()) {
+			formDirty = true;
+			$('#saveHeader').removeAttr("disabled");
+		} else { 
+			$('#saveHeader').attr("disabled", true);
+			formDirty = false; 
+		}
+	}
+
+	$("#saveHeader").on('click', () => {
+
+		if (editTitleInput.isValid() && editSubtitileInput.isValid() && editDescriptionInput.isValid()) {
+
+			var result = {
+				Id: $scope.itemId,
+				Label: editLabel.val(),
+				SubLabel: editSubLabel.val(),
+				Description: editDescription.val(),
+			};
+
+			http.post('/api/customize/header/edit', result, (response) => {
+				Swal.fire({
+					title: "Успех!",
+					text: `Заголовок успешно изменен!`,
+					icon: "success"
+				});
+				$scope.itemId = null;
+				$("#partialZone").load('admin/allHeaders');
+			});
+		} else {
+			Swal.fire({
+				title: "Упс..",
+				text: `Не все обязательные поля заполнены.`,
+				icon: "error"
+			});
+		}
+	});
+
+</script>

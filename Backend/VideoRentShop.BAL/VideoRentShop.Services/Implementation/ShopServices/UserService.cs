@@ -29,7 +29,7 @@ namespace VideoRentShop.Services.Implementation.ShopServices
         {
 			var user = _userRepository.Get(id);
 
-			if (user == null) throw new Exception("Пользователь с таким ИД не найден.");
+			if (user == null) throw new Exception(ErrorMessages.NotFoundByIdError);
 
 			_userRepository.UnitOfWork.Execute(() =>
 			{

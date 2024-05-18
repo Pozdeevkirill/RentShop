@@ -7,7 +7,7 @@
 			<div class="row">
 				<div class="col-md-6 col-sm-12">
 					<div class="title">
-						<h4>Создание нового описания баннера</h4>
+						<h4>Создание нового описания банера</h4>
 					</div>
 				</div>
 			</div>
@@ -54,25 +54,15 @@
 				<div class="form-group row">
 					<label class="col-sm-12 col-md-2 col-form-label">Задний фон</label>
 					<div class="col-sm-12 col-md-10">
-						<input type="file" name="Images" id="file-input" accept="image/png, image/jpeg" multiple>
-						<label for="file-input" class="file">
-							<i class="fas fa-upload"></i> &nbsp; Добавить
-						</label>
-					</div>
-				</div>
-
-				<div class="form-group row">
-					<label class="col-sm-12 col-md-2 col-form-label">Задний фон</label>
-					<div class="col-sm-12 col-md-10">
 						<div>
 							<img src="~/MainTemplate/images/banner-bg.jpg" id="image"/>
 						</div>
 						<img src="" id="imageOutput" />
 
-						<label for="file-input2" class="file">
-							<i class="fas fa-upload"></i> &nbsp; Добавить
-							<input type="file" name="Images" id="file-input2" accept="image/png, image/jpeg" multiple>
+						<label for="file-input2" class="btn btn-primary">
+							<i class="bi bi-upload"></i> &nbsp; Добавить
 						</label>
+						<input type="file" name="Images" id="file-input2" accept="image/png, image/jpeg" style="display:none" multiple>
 					</div>
 				</div>
 			</form>
@@ -97,8 +87,6 @@
 
 		$("#file-input2").on("change", function () {
 			var files = event.target.files;
-
-			console.log(files);
 
 			if (files && files.length > 0) {
 				let file = files[0];
@@ -160,14 +148,14 @@
 							success: function (response) {
 								Swal.fire({
 									title: "Успех!",
-									text: `Товар успешно создан!`,
+									text: `Заголовок успешно создан!`,
 									icon: "success"
 								});
 							},
 							error: function (response) {
 								Swal.fire({
 									title: "Упс..",
-									text: `При создании товара произошла ошибка.`,
+									text: `При создании заголовка произошла ошибка.`,
 									icon: "error"
 								});
 							}

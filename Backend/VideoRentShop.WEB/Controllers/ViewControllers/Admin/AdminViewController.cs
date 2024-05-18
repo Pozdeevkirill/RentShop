@@ -39,6 +39,12 @@ namespace VideoRentShop.WEB.Controllers.ViewControllers.Admin
             return PartialView($"{_defaultViewFolder}/Shop/AllItems");
         }
 
+        [Route("editItem")]
+        public ActionResult EditItem()
+        {
+            return PartialView($"{_defaultViewFolder}/Shop/EditItem");
+        }
+
         [Route("addHeader")]
         public ActionResult ViewAddHeader()
         {
@@ -49,6 +55,12 @@ namespace VideoRentShop.WEB.Controllers.ViewControllers.Admin
         public ActionResult ViewAllHeader()
         {
             return PartialView($"{_defaultViewFolder}/Customize/Header/AllHeaders");
+        }
+
+        [Route("editHeader")]
+        public ActionResult EditHeader()
+        {
+            return PartialView($"{_defaultViewFolder}/Customize/Header/EditHeader");
         }
     }
 }

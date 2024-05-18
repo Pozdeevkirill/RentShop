@@ -40,7 +40,7 @@
 									<p class="card-text truncate-text">{description}</p>
 								</div>
 								<div class="item-card__btn-holder headerCard_btns">
-									<a href="#" class="btn-circle btn-blue"><i class="dw dw-edit2"></i></a>
+									<a href="#" class="btn-circle btn-blue" onclick="editCard('{itemId}')"><i class="dw dw-edit2"></i></a>
 									<a href="#" class="btn-circle btn-red" onClick="RemoveItem('{itemId}')"><i class="dw dw-delete-3"></i></a>
 									{activeBtn}
 								</div>
@@ -64,7 +64,6 @@
 		} 
 
 		for (var i = 0; i < data.length; i++) {
-			console.log(data[i]);
 			result += template.supplant({ label: data[i].label, 
 				sublabel: data[i].subLabel, 
 				description: data[i].description,
@@ -78,11 +77,9 @@
 		cardHolder.innerHTML = result;
 	});
 	pagination.Init();
-	console.log(pagination);
 
 	function RemoveItem(id) {
 		http.post(`/api/customize/header/remove?headerId=${id}`, {}, () => {
-			console.log("removed");
 			pagination.ShowPage(1);
 		});
 	}
@@ -90,7 +87,13 @@
 	function ActiveCard(id) {
 		http.post(`/api/customize/header/setActive?headerId=${id}`, {}, () => {
 			pagination.ShowPage(1);
-		})
+		});
 	}
+
+	function editCard(id) {
+		$("#partialZone").load('admin/editHeader');
+		$scope.itemId = id;
+	}
+
 
 </script>

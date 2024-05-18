@@ -1,6 +1,7 @@
-﻿using VideoRentShop.Data.Interfaces;
+﻿using VideoRentShop.Common;
+using VideoRentShop.Data.Interfaces;
 using VideoRentShop.HttpModels.Requests;
-using VideoRentShop.HttpModels.Requests.Public;
+using VideoRentShop.HttpModels.Requests.Admin;
 using VideoRentShop.HttpModels.Responses;
 using VideoRentShop.HttpModels.ViewObjects;
 using VideoRentShop.HttpModels.ViewObjects.Shop;
@@ -15,7 +16,17 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 		private readonly IRepository<Header> _headerRepository;
 		private readonly IRepository<FileAttachment> _fileAttachmentRepository;
 
-		public HeaderService(IRepository<Header> headerRepository,
+
+		private readonly Func<Header, HeaderVo> _headerVoConverter = x => new HeaderVo()
+		{
+            Id = x.Id,
+            Label = x.Label,
+            SubLabel = x.SubLabel,
+            Description = x.Description,
+            IsActive = x.IsActive
+        };
+
+        public HeaderService(IRepository<Header> headerRepository,
 							IRepository<FileAttachment> fileAttachmentRepository)
 		{
 			_headerRepository = headerRepository;
@@ -24,11 +35,11 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 
 		public IdWithNameVo CreateHeader(CreateHeaderRequest request)
 		{
-			if (request == null) throw new Exception("Запрос не может быть пустым.");
+			if (request == null) throw new Exception(ErrorMessages.RequestEmptyError);
 
 			if (string.IsNullOrEmpty(request.Label)
 				|| string.IsNullOrEmpty(request.SubLabel)
-				|| string.IsNullOrEmpty(request.Description)) throw new Exception("Не все обязательные поля заполненны.");
+				|| string.IsNullOrEmpty(request.Description)) throw new Exception(ErrorMessages.RequiredFieldsError);
 
 			Header header = new(request.Label, request.SubLabel, request.Description, request.IsActive);
 
@@ -52,17 +63,31 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 			return result;
 		}
 
-		public HeaderVo GetActiveHeader()
+        public void EditHeader(EditHeaderRequest request)
+        {
+            if (request == null) throw new Exception(ErrorMessages.RequestEmptyError);
+
+			var curHeader = _headerRepository.Get(request.Id);
+
+			if (curHeader == null) throw new Exception(ErrorMessages.NotFoundByIdError);
+
+			if (curHeader.Label == request.Label &&
+				curHeader.SubLabel == request.SubLabel &&
+				curHeader.Description == request.Description) throw new Exception(ErrorMessages.EntityNotChangedError);
+
+			_headerRepository.UnitOfWork.Execute(() =>
+			{
+				curHeader.Label = request.Label;
+				curHeader.SubLabel = request.SubLabel;
+				curHeader.Description = request.Description;
+
+				_headerRepository.Update(curHeader);
+			});
+        }
+
+        public HeaderVo GetActiveHeader()
 		{
-           var header = _headerRepository.List(x => x.IsActive).Select(
-                x => new HeaderVo
-                {
-					Id = x.Id,
-                    Label = x.Label,
-                    SubLabel = x.SubLabel,
-                    Description = x.Description,
-                    IsActive = x.IsActive
-                }).Single();
+           var header = _headerRepository.List(x => x.IsActive).Select(_headerVoConverter).Single();
 			var file = _fileAttachmentRepository.List(x => x.EntityId == header.Id).FirstOrDefault();
 
 
@@ -71,9 +96,16 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 			return header;
 		}
 
-		public PaginationResponse<HeaderVo> GetHeaders(PaginationRequest request)
+        public HeaderVo GetHeader(Guid id)
+        {
+			if (id == Guid.Empty) throw new Exception(ErrorMessages.IdCantBeNullError);
+
+			return _headerRepository.List(x => x.Id == id).Select(_headerVoConverter).Single();
+        }
+
+        public PaginationResponse<HeaderVo> GetHeaders(PaginationRequest request)
 		{
-			if (request == null) throw new Exception("Запрос не может быть пустым!");
+			if (request == null) throw new Exception(ErrorMessages.RequestEmptyError);
 
 			if (request.Skip < 0) request.Skip = 0;
 
@@ -81,16 +113,7 @@ namespace VideoRentShop.Services.Implementation.ShopServices
 
 			var data = _headerRepository.List(x => !x.IsDeleted).OrderByDescending(x => x.IsActive)
 													.Skip(request.Skip).Take(request.Take)
-													.Select(
-														x => new HeaderVo()
-														{
-															Id = x.Id,
-															Label = x.Label,
-															SubLabel= x.SubLabel,
-															Description= x.Description,
-															IsActive = x.IsActive,
-														}
-													).ToList();
+													.Select(_headerVoConverter).ToList();
 
 			foreach (var item in data)
 			{
@@ -107,9 +130,9 @@ namespace VideoRentShop.Services.Implementation.ShopServices
         {
             var header = _headerRepository.Get(id);
 
-			if (header == null) throw new Exception("Не удалось найти объект с таким Id");
+			if (header == null) throw new Exception(ErrorMessages.NotFoundByIdError);
 
-			if (header.IsActive) throw new Exception("Невозможно удалить активный элемент описания банера");
+			if (header.IsActive) throw new Exception("Невозможно удалить активный элемент описания банера.");
 
 			_headerRepository.UnitOfWork.Execute(() =>
 			{

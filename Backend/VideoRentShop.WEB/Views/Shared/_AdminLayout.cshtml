@@ -252,7 +252,6 @@
 									<li><a onclick="loadPartial('admin/allHeaders', this)">Список описаний баннера</a></li>
 								</ul>
 							</li>
-							<li><a onclick="loadPartial('admin/addUser', this)">Добавить пользователя</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
@@ -293,6 +292,8 @@
 
 	<script>
 		let http = new HttpClient();
+
+		let $scope = {};
 
 		$("#logOutBtn").on('click', () => {
 			http.post('/api/logout', null, (response) => {

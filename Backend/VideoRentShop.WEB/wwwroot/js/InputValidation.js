@@ -47,6 +47,7 @@
     }
 
     return {
-        isValid: isValid
+        isValid: isValid,
+        validate: validate
     }
 }

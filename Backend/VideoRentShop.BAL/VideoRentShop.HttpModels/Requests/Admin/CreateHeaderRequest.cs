@@ -1,4 +1,4 @@
-﻿namespace VideoRentShop.HttpModels.Requests.Public
+﻿namespace VideoRentShop.HttpModels.Requests.Admin
 {
     /// <summary>
     /// Запрос на создание объекта Header

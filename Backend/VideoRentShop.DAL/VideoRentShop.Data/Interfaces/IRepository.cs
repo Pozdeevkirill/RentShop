@@ -66,8 +66,8 @@ namespace VideoRentShop.Data.Interfaces
         /// <param name="predicate">Функция сортировки</param>
         TEntity? Get(Expression<Func<TEntity, bool>> predicate);
 
-		IList<TEntity> List();
-		IList<TEntity> List(Expression<Func<TEntity, bool>> predicate);
+        IQueryable<TEntity> List();
+        IQueryable<TEntity> List(Expression<Func<TEntity, bool>> predicate);
 
 		IList<TEntity> ListToPagin(int take, int skip);
         IList<TEntity> ListToPagin(int take, int skip, Expression<Func<TEntity, bool>> predicate);

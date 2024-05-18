@@ -3,7 +3,7 @@
     /// <summary>
     /// Базовый класс ответа от АПИ
     /// </summary>
-    public class BaseResponse
+    public abstract class BaseResponse
     {
     }
 }

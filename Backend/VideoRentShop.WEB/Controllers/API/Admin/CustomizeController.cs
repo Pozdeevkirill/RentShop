@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VideoRentShop.HttpModels.Requests;
-using VideoRentShop.HttpModels.Requests.Public;
+using VideoRentShop.HttpModels.Requests.Admin;
 using VideoRentShop.Services.Interfaces.ShopServices;
 
 namespace VideoRentShop.WEB.Controllers.API.Admin
@@ -49,6 +49,21 @@ namespace VideoRentShop.WEB.Controllers.API.Admin
 		public ActionResult SetActive(Guid headerId)
 		{
 			_headerService.SetActive(headerId);
+			return Ok();
+		}
+
+		[HttpGet]
+		[Route("header/get")]
+		public ActionResult GetHeader([FromQuery]Guid headerId)
+		{
+			return Ok(_headerService.GetHeader(headerId));
+		}
+
+		[HttpPost]
+		[Route("header/edit")]
+		public ActionResult EditHeader([FromBody]EditHeaderRequest request)
+		{
+			_headerService.EditHeader(request);
 			return Ok();
 		}
 

@@ -28,7 +28,7 @@ namespace VideoRentShop.Services.Implementation.Identity
 
         public TokenResponse Login(LoginRequest request, string createdIp)
         {
-            if (request == null) throw new ArgumentNullException("request");
+            if (request == null) throw new ArgumentNullException(ErrorMessages.RequiredFieldsError);
 
             var user = _userRepository.Get(request.Login);
 
@@ -65,7 +65,7 @@ namespace VideoRentShop.Services.Implementation.Identity
 
         public void Register(RegisterRequest request)
         {
-            if (request == null) throw new ArgumentNullException("request");
+            if (request == null) throw new ArgumentNullException(ErrorMessages.RequestEmptyError);
 
             if (_userRepository.Any(x => x.Login == request.Login)) throw new Exception("Пользователь с такми логином уже зарегестрирован.");
 
@@ -103,7 +103,7 @@ namespace VideoRentShop.Services.Implementation.Identity
 
 		public void AddUser(AddUserRequest request)
 		{
-			if (request == null) throw new ArgumentNullException("request");
+			if (request == null) throw new ArgumentNullException(ErrorMessages.RequestEmptyError);
 
 			if (_userRepository.Any(x => x.Login == request.Login)) return;
 
