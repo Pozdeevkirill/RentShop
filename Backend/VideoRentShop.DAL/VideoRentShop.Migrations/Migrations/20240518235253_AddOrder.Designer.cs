@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VideoRentShop.Data;
 
@@ -11,9 +12,11 @@ using VideoRentShop.Data;
 namespace VideoRentShop.Migrations.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    partial class MainDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240518235253_AddOrder")]
+    partial class AddOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace VideoRentShop.Migrations.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-           /* modelBuilder.Entity("ItemOrder", b =>
+            modelBuilder.Entity("ItemOrder", b =>
                 {
                     b.Property<Guid>("CartId")
                         .HasColumnType("uniqueidentifier");
@@ -35,7 +38,7 @@ namespace VideoRentShop.Migrations.Migrations
                     b.HasIndex("OrdersId");
 
                     b.ToTable("ItemOrder");
-                });*/
+                });
 
             modelBuilder.Entity("VideoRentShop.Models.Identity.User", b =>
                 {
@@ -73,11 +76,9 @@ namespace VideoRentShop.Migrations.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("EntitToId")
-                        .HasColumnName("Item")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("EntityId")
-                        .HasColumnName("Order")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -266,7 +267,7 @@ namespace VideoRentShop.Migrations.Migrations
                     b.HasDiscriminator().HasValue("ItemFile");
                 });
 
-            /*modelBuilder.Entity("ItemOrder", b =>
+            modelBuilder.Entity("ItemOrder", b =>
                 {
                     b.HasOne("VideoRentShop.Models.Shop.Item", null)
                         .WithMany()
@@ -279,7 +280,7 @@ namespace VideoRentShop.Migrations.Migrations
                         .HasForeignKey("OrdersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });*/
+                });
 
             modelBuilder.Entity("VideoRentShop.Models.ScopeContexts.OrderToItemScopeContext", b =>
                 {
@@ -294,6 +295,10 @@ namespace VideoRentShop.Migrations.Migrations
                         .HasForeignKey("EntityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("EntitTo");
+
+                    b.Navigation("Entity");
                 });
 
             modelBuilder.Entity("VideoRentShop.Models.Shop.Banner", b =>

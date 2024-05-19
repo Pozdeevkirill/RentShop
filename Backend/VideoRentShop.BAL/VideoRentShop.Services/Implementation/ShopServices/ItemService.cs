@@ -44,15 +44,7 @@ namespace VideoRentShop.Services.Implementation.ShopServices
         {
 			if (request == null) throw new Exception(ErrorMessages.RequestEmptyError);
 
-			var curItem = _itemRepository.List(x => x.Id == request.Id).Select(x => new Item()
-			{
-				Id = x.Id,
-				Count = x.Count,
-				Description = x.Description,
-				IsActive = x.IsActive,
-				Name = x.Name,
-				Price = x.Price,
-			}).Single();
+			var curItem = _itemRepository.Get(x => x.Id == request.Id);
 
 			//Не делаю проверку на нул, т.к. используем сингл
 

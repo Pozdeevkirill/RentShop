@@ -33,5 +33,7 @@ namespace VideoRentShop.Models.Shop
         /// Картинки к товару
         /// </summary>
         public List<ItemFile>? Files { get; set; }
+
+        public List<Order> Orders { get; set; }
     }
 }

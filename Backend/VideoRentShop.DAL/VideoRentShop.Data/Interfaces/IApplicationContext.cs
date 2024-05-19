@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VideoRentShop.Models.Identity;
+using VideoRentShop.Models.ScopeContexts;
 using VideoRentShop.Models.Shop;
 using VideoRentShop.Models.Shop.File;
 
@@ -13,5 +14,8 @@ namespace VideoRentShop.Data.Interfaces
         DbSet<ItemFile> ItemFiles { get; }  
         DbSet<Banner> Banners { get; }
         DbSet<Header> Headers { get; }
+        DbSet<Order> Orders { get; }
+
+        DbSet<OrderToItemScopeContext> OrderToItemScopeContext { get; }
     }
 }
